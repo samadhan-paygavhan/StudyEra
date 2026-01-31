@@ -1,9 +1,130 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+
+// Import images
+import webDev from "../../assets/images/Web Development.png";
+import dataScience from "../../assets/images/Data Science.png";
+import ml from "../../assets/images/Machine Learning.png";
+import cyber from "../../assets/images/Cyber Security.png";
 
 const Hero = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const sliderData = [
+    {
+      img: webDev,
+      title: "Web Development",
+      desc: "Build modern, responsive websites with the MERN stack.",
+    },
+    {
+      img: dataScience,
+      title: "Data Science",
+      desc: "Analyze complex data and build predictive models.",
+    },
+    {
+      img: ml,
+      title: "Machine Learning",
+      desc: "Train intelligent algorithms to solve real-world problems.",
+    },
+    {
+      img: cyber,
+      title: "Cyber Security",
+      desc: "Protect digital assets and master ethical hacking.",
+    },
+  ];
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev === sliderData.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? sliderData.length - 1 : prev - 1));
+  };
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, [currentIndex]);
+
   return (
-    <h1>Hero</h1>
+    <section className="mt-[100px] flex min-h-[85vh] items-center bg-[#fcfcfd] overflow-hidden relative">
+      {/* Decorative Background Element for StudyEra style */}
+      <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#483D8B]/5 rounded-full blur-3xl -z-10"></div>
+
+      <div className="flex flex-row items-center w-full max-w-[1440px] mx-auto px-6 lg:px-12 gap-10">
+        {/* LEFT SIDE: TEXT CONTENT */}
+        <div className="w-[45%] flex flex-col justify-center py-10">
+          <div key={currentIndex} className="animate-fade-in">
+            <span className="text-[#483D8B] font-bold tracking-[0.2em] uppercase text-xs mb-4 block">
+              StudyEra Specialization
+            </span>
+
+            <h1 className="text-3xl lg:text-5xl font-black text-[#1A1939] leading-[1.1] mb-6">
+              Master <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#483D8B] to-[#6a5acd]">
+                {sliderData[currentIndex].title}
+              </span>
+            </h1>
+
+            <p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-[90%] border-l-4 border-[#483D8B]/20 pl-6">
+              {sliderData[currentIndex].desc}
+            </p>
+
+            <div className="flex gap-5">
+              <button className="bg-[#483D8B] hover:bg-[#3b3272] text-white px-10 py-4 rounded-xl font-bold transition-all transform hover:translate-y-[-2px] hover:shadow-xl shadow-indigo-200">
+                Get Started
+              </button>
+              <button className="bg-transparent border-2 border-gray-200 hover:border-[#483D8B] hover:text-[#483D8B] text-gray-700 px-8 py-4 rounded-xl font-bold transition-all">
+                View Syllabus
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE: IMAGE SLIDER */}
+        <div className="w-[55%] flex items-center relative">
+          {/* Navigation Arrows (Positioned inside/around the image) */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 z-20 bg-white/90 p-3 rounded-full shadow-lg text-[#483D8B] hover:bg-[#483D8B] hover:text-white transition-all active:scale-90"
+          >
+            <FaAngleLeft size={24} />
+          </button>
+
+          <div className="h-[520px] w-full overflow-hidden shadow-[0_20px_50px_rgba(72,61,139,0.15)] bg-white relative rounded-[2rem] border-5 border-[#F3F4F6] transition-all hover:shadow-2xl">
+            <img
+              key={currentIndex}
+              src={sliderData[currentIndex].img}
+              alt="StudyEra Banner"
+              className="h-full w-full object-cover animate-image-zoom"
+            />
+
+            {/* Dot Indicators */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 bg-black/10 backdrop-blur-md px-4 py-2 rounded-full">
+              {sliderData.map((_, index) => (
+                <div
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`cursor-pointer h-2 rounded-full transition-all duration-500 ${
+                    index === currentIndex
+                      ? "bg-white w-10"
+                      : "bg-white/40 w-2 hover:bg-white/60"
+                  }`}
+                ></div>
+              ))}
+            </div>
+          </div>
+
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 z-20 bg-white/90 p-3 rounded-full shadow-lg text-[#483D8B] hover:bg-[#483D8B] hover:text-white transition-all active:scale-90"
+          >
+            <FaAngleRight size={24} />
+          </button>
+        </div>
+      </div>
+    </section>
   );
-}
+};
 
 export default Hero;

@@ -11,12 +11,12 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
-      {/* <Hero />
-        <Stats />
-        <TopCourses />
-        <Testimonials />
-        <Explore />
-        <Footer /> */}
+      <Hero />
+      <Stats />
+      <TopCourses />
+      <Testimonials />
+      <Explore />
+      <Footer />
     </>
   );
 };
