@@ -47,13 +47,12 @@ const Hero = () => {
   }, [currentIndex]);
 
   return (
-    <section className="mt-[100px] flex min-h-[85vh] items-center bg-[#fcfcfd] overflow-hidden relative">
-      {/* Decorative Background Element for StudyEra style */}
+    <section className=" flex min-h-[85vh] items-center bg-[#fcfcfd] overflow-hidden relative">
       <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#483D8B]/5 rounded-full blur-3xl -z-10"></div>
 
       <div className="flex flex-row items-center w-full max-w-[1440px] mx-auto px-6 lg:px-12 gap-10">
         {/* LEFT SIDE: TEXT CONTENT */}
-        <div className="w-[45%] flex flex-col justify-center py-10">
+        <div className="sm:hidden w-[45%] xl:flex flex-col justify-center py-10">
           <div key={currentIndex} className="animate-fade-in">
             <span className="text-[#483D8B] font-bold tracking-[0.2em] uppercase text-xs mb-4 block">
               StudyEra Specialization
@@ -82,8 +81,7 @@ const Hero = () => {
         </div>
 
         {/* RIGHT SIDE: IMAGE SLIDER */}
-        <div className="w-[55%] flex items-center relative">
-          {/* Navigation Arrows (Positioned inside/around the image) */}
+        <div className="w-full xl:w-[55%] flex items-center relative">
           <button
             onClick={prevSlide}
             className="absolute left-4 z-20 bg-white/90 p-3 rounded-full shadow-lg text-[#483D8B] hover:bg-[#483D8B] hover:text-white transition-all active:scale-90"
@@ -99,7 +97,6 @@ const Hero = () => {
               className="h-full w-full object-cover animate-image-zoom"
             />
 
-            {/* Dot Indicators */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 bg-black/10 backdrop-blur-md px-4 py-2 rounded-full">
               {sliderData.map((_, index) => (
                 <div

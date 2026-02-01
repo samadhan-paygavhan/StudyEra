@@ -1,42 +1,17 @@
 import React from "react";
-import Button from "../Button";
 import { IoIosSearch } from "react-icons/io";
 import NavInput from "./NavInput";
+import Buttons from "./Buttons";
 
 const Navbar = () => {
-  const buttonName = [
-    {
-      name: "Home",
-    },
-
-    {
-      name: "Teach on StudyEra",
-    },
-
-    {
-      name: "About",
-    },
-
-    {
-      name: "Login",
-    },
-
-    {
-      name: "SignUp",
-    },
-  ];
-
   return (
-    <div className="h-[100px] w-full px-6 lg:px-[8rem] flex justify-between items-center fixed top-0 left-0 z-[1000] bg-white/80 backdrop-blur-[10px] border-b border-black/5 font-['Montserrat',sans-serif]">
-      <h1 className=" text-3xl font-bold">StudyEra</h1>
-      <NavInput />
-
-      <div className="flex items-center gap-2">
-        {buttonName.map((button, idx) => {
-          return <Button btnName={button.name} key={idx} />;
-        })}
+    <nav className="w-full bg-white shadow-sm flex items-center h-[100px]">
+      <div className="container mx-[1rem] sm:flex items-center justify-between px-4 md:px-8 lg:mx-auto xl:px-[64px] max-w-[1440px]">
+        <h1 className="text-2xl font-bold text-[#1A1939]">StudyEra</h1>
+        <NavInput />
+        <Buttons />
       </div>
-    </div>
+    </nav>
   );
 };
 
