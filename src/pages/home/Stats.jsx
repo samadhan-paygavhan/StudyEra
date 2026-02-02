@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Stats = () => {
   return (
-    <h1>Stats</h1>
-  )
-}
+    <>
+      <div className="h-[150px] w-full"></div>
+    </>
+  );
+};
 
 export default Stats;

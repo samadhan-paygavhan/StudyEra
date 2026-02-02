@@ -33,9 +33,8 @@ const Buttons = () => {
         })}
       </div>
 
-      {/* This only shows on Extra Small and Small screens (hidden on md+) */}
-      <div className="lg:hidden sm:flex-col items-center justify-center">
-        <div className=" p-2 rounded-lg transition-all duration-200 hover:bg-gray-100 active:bg-gray-200 active:scale-90 group">
+      <div className="lg:hidden max-sm:flex items-center">
+        <div className="flex items-center p-2 rounded-lg transition-all duration-200 hover:bg-gray-100 active:bg-gray-200 active:scale-90 group">
           <IoReorderThreeOutline
             className="text-[2.5rem] text-[#1A1939] group-hover:text-[#483D8B] transition-colors"
             onClick={() => setToggle(!toggle)}

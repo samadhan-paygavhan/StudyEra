@@ -6,7 +6,7 @@ import LeftSection from "./LeftSection";
 import Explore from "../../components/common/Explore";
 import Footer from "../../components/common/Footer";
 
-const TeachOnStudyEraPage = () => {
+const Instructor = () => {
   return (
     <>
       <Navbar />
@@ -19,4 +19,4 @@ const TeachOnStudyEraPage = () => {
   );
 };
 
-export default TeachOnStudyEraPage;
+export default Instructor;

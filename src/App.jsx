@@ -7,7 +7,7 @@ import CoursesPage from "./pages/courses/CoursesPage";
 import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/signup/SignupPage";
 import MyBatchPage from "./pages/my-batch/MyBatchPage";
-import TeachOnStudyEraPage from "./pages/teach-on-studyera/TeachOnStudyEraPage";
+import Instructor from "./pages/instructor/Instructor";
 
 function App() {
   return (

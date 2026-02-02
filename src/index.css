@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+.slick-slide > div {
+  margin: 0 10px;
+  height: 100%;
+}
+
+/* Target the arrow buttons */
+.slick-prev,
+.slick-next {
+  width: 40px !important;
+  height: 40px !important;
+  z-index: 20 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Position them outside the tracks */
+.slick-prev {
+  left: -40px !important;
+}
+
+.slick-next {
+  right: -40px !important;
+  left: auto !important; /* Forces the right alignment */
+}
+
+/* Style the actual icons (:before) */
+.slick-prev:before,
+.slick-next:before {
+  font-size: 40px !important;
+  color: black !important;
+  opacity: 0.8;
+}
+
+.slick-track {
+  display: flex !important;
+}
+.slick-slide {
+  height: inherit !important;
+}

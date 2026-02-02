@@ -47,12 +47,12 @@ const Hero = () => {
   }, [currentIndex]);
 
   return (
-    <section className=" flex min-h-[85vh] items-center bg-[#fcfcfd] overflow-hidden relative">
-      <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#483D8B]/5 rounded-full blur-3xl -z-10"></div>
+    <section className=" flex md:min-h-[80vh] items-center bg-[#fcfcfd] overflow-hidden relative max-sm:items-center max-sm:h-[35vh]">
+      <div className="absolute top-[-20%] left-[-5%] w-[400px] h-[400px] bg-[#483D8B]/5 rounded-full blur-3xl -z-10"></div>
 
-      <div className="flex flex-row items-center w-full max-w-[1440px] mx-auto px-6 lg:px-12 gap-10">
+      <div className="flex flex-row items-center w-full max-w-[1440px] mx-auto px-6 max-sm:px-0 max-sm:mx-0 lg:px-12 gap-10 ">
         {/* LEFT SIDE: TEXT CONTENT */}
-        <div className="sm:hidden w-[45%] xl:flex flex-col justify-center py-10">
+        <div className="max-xl:hidden w-[45%] xl:flex flex-col justify-center py-10">
           <div key={currentIndex} className="animate-fade-in">
             <span className="text-[#483D8B] font-bold tracking-[0.2em] uppercase text-xs mb-4 block">
               StudyEra Specialization
@@ -81,15 +81,15 @@ const Hero = () => {
         </div>
 
         {/* RIGHT SIDE: IMAGE SLIDER */}
-        <div className="w-full xl:w-[55%] flex items-center relative">
+        <div className="w-full xl:w-[55%] flex items-center relative sm:h-[60vh]">
           <button
             onClick={prevSlide}
-            className="absolute left-4 z-20 bg-white/90 p-3 rounded-full shadow-lg text-[#483D8B] hover:bg-[#483D8B] hover:text-white transition-all active:scale-90"
+            className="hidden md:block absolute left-4 z-20 bg-white/90 p-3 rounded-full shadow-lg text-[#483D8B] hover:bg-[#483D8B] hover:text-white transition-all active:scale-90"
           >
-            <FaAngleLeft size={24} />
+            <FaAngleLeft size={22} />
           </button>
 
-          <div className="h-[520px] w-full overflow-hidden shadow-[0_20px_50px_rgba(72,61,139,0.15)] bg-white relative rounded-[2rem] border-5 border-[#F3F4F6] transition-all hover:shadow-2xl">
+          <div className="md:h-[520px] w-full overflow-hidden shadow-[0_20px_50px_rgba(72,61,139,0.15)] bg-white relative rounded-[2rem] border-5 border-[#F3F4F6] transition-all hover:shadow-2xl sm:h-[50vh] max-sm:h-[30vh]">
             <img
               key={currentIndex}
               src={sliderData[currentIndex].img}
@@ -114,9 +114,9 @@ const Hero = () => {
 
           <button
             onClick={nextSlide}
-            className="absolute right-4 z-20 bg-white/90 p-3 rounded-full shadow-lg text-[#483D8B] hover:bg-[#483D8B] hover:text-white transition-all active:scale-90"
+            className="hidden md:block absolute right-4 z-20 bg-white/90 p-3 rounded-full shadow-lg text-[#483D8B] hover:bg-[#483D8B] hover:text-white transition-all active:scale-90"
           >
-            <FaAngleRight size={24} />
+            <FaAngleRight size={22} />
           </button>
         </div>
       </div>
