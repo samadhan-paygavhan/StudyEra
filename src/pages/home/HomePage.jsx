@@ -3,9 +3,8 @@ import Hero from "./Hero";
 import Stats from "./Stats";
 import TopCourses from "./TopCourses";
 import Testimonials from "./Testimonials";
-import Footer from "../../components/common/Footer";
 import Navbar from "../../components/common/navbar/Navbar";
-import Explore from "../../components/common/Explore";
+import ExploreAndFooter from "../../components/common/ExploreAndFooter";
 
 const HomePage = () => {
   return (
@@ -15,8 +14,7 @@ const HomePage = () => {
       <Stats />
       <TopCourses />
       <Testimonials />
-      <Explore />
-      <Footer />
+      <ExploreAndFooter />
     </>
   );
 };

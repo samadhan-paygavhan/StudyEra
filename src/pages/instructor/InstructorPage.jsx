@@ -3,20 +3,18 @@ import Navbar from "../../components/common/navbar/Navbar";
 import Hero from "./Hero";
 import RightSection from "./RightSection";
 import LeftSection from "./LeftSection";
-import Explore from "../../components/common/Explore";
-import Footer from "../../components/common/Footer";
+import ExploreAndFooter from "../../components/common/ExploreAndFooter";
 
-const Instructor = () => {
+const InstructorPage = () => {
   return (
     <>
       <Navbar />
       <Hero />
       <RightSection />
       <LeftSection />
-      <Explore />
-      <Footer />
+      <ExploreAndFooter />
     </>
   );
 };
 
-export default Instructor;
+export default InstructorPage;

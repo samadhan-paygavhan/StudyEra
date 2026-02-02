@@ -6,7 +6,7 @@ import Logo from "../../../assets/images/StudyEra-logo.png";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-white shadow-sm flex items-center h-[100px]">
+    <nav className="w-full bg-white shadow-sm flex items-center h-[100px] border-b border-black">
       <div className="container mx-[1rem] max-sm:flex max-sm:items-center sm:flex items-center justify-between px-4 md:px-8 lg:mx-auto xl:px-[64px] max-w-[1440px]">
         <img
           src={Logo}

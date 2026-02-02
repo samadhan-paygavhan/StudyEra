@@ -2,9 +2,8 @@ import React from "react";
 import Hero from "./Hero";
 import OurMission from "./OurMission";
 import WhyWeAreDifferent from "./WhyWeAreDifferent";
-import Explore from "../../components/common/Explore";
-import Footer from "../../components/common/Footer";
 import Navbar from "../../components/common/navbar/Navbar";
+import ExploreAndFooter from "../../components/common/ExploreAndFooter";
 
 const About = () => {
   return (
@@ -13,8 +12,7 @@ const About = () => {
       <Hero />
       <OurMission />
       <WhyWeAreDifferent />
-      <Explore />
-      <Footer />
+      <ExploreAndFooter />
     </>
   );
 };

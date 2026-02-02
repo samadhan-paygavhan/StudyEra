@@ -11,7 +11,7 @@ const TopCourses = () => {
   ];
 
   return (
-    <div className="py-10 flex flex-col items-center gap-15">
+    <div className="py-10 bg-[#fcfcfd] flex flex-col items-center gap-15">
       <h1 className="font-bold text-4xl">Top Courses</h1>
       <TopCourseSlider topCoursesData={topCoursesData} />
     </div>

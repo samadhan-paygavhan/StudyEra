@@ -4,7 +4,7 @@ import Button from "./Button";
 const Card = ({ course }) => {
   return (
     <div className="px-2 pb-5 outline-none">
-      <div className="max-w-[295px] w-full h-[380px] mx-auto flex flex-col bg-white border rounded-lg overflow-hidden shadow-sm">
+      <div className="max-w-[295px] w-full h-[350px] mx-auto flex flex-col bg-white border rounded-lg overflow-hidden shadow-sm">
         <div className="h-40 bg-yellow-400 flex flex-shrink-0 items-center justify-center font-bold">
           Image
         </div>
