@@ -6,9 +6,7 @@ import ExploreAndFooter from "../../components/common/ExploreAndFooter";
 const CoursesPage = () => {
   return (
     <>
-      <Navbar />
       <Hero />
-      <ExploreAndFooter />
     </>
   );
 };

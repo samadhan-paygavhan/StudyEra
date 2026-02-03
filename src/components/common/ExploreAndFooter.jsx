@@ -124,9 +124,15 @@ const ExploreAndFooter = () => {
     width < 1024 ? courseDetail.slice(0, 2) : courseDetail;
 
   return (
-    <section className="bg-[#1A1939] text-[#e1e1e1] px-6 lg:px-16 py-12 w-full mt-auto">
+    <section className="mt-10 bg-[#1A1939] text-[#e1e1e1] px-6 lg:px-16 py-12 w-full">
       <div className="max-w-[1440px] mx-auto">
-        <h2 className="font-black text-3xl mb-10 border-b-2 border-[#483D8B] pb-4 inline-block max-md:text-2xl">
+        <h2
+          className="font-black text-3xl mb-10 border-[#483D8B] pb-4 
+               block md:inline-block 
+               max-md:text-2xl 
+               max-sm:text-center max-sm:mx-auto max-sm:border-b-0s
+               border-b-2"
+        >
           Explore StudyEra Specializations
         </h2>
 
@@ -141,7 +147,7 @@ const ExploreAndFooter = () => {
                 {course.topics.map((topic, ind) => (
                   <p
                     key={ind}
-                    className="text-gray-400 text-sm hover:text-[#483D8B] hover:translate-x-1 transition-all duration-200 cursor-pointer"
+                    className="text-gray-400 text-sm transition-all duration-200"
                   >
                     {topic}
                   </p>

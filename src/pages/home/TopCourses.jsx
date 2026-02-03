@@ -1,18 +1,34 @@
 import React from "react";
-import Card from "../../components/common/Card";
 import TopCourseSlider from "./TopCourseSlider";
+import courseImages from "../../assets/images/courseImages";
 
 const TopCourses = () => {
   const topCoursesData = [
-    { title: "Full Stack", description: "The course is best for freshers" },
-    { title: "Data Science", description: "Master Python and ML" },
-    { title: "UI/UX Design", description: "Design beautiful interfaces" },
-    { title: "DevOps", description: "Learn CI/CD and Cloud" },
+    {
+      image: courseImages[0],
+      title: "Full Stack",
+      description: "The course is best for freshers",
+    },
+    {
+      image: courseImages[1],
+      title: "Data Science",
+      description: "Master Python and ML",
+    },
+    {
+      image: courseImages[2],
+      title: "UI/UX Design",
+      description: "Design beautiful interfaces",
+    },
+    {
+      image: courseImages[3],
+      title: "DevOps",
+      description: "Learn CI/CD and Cloud",
+    },
   ];
 
   return (
     <div className="py-10 bg-[#fcfcfd] flex flex-col items-center gap-15">
-      <h1 className="font-bold text-4xl">Top Courses</h1>
+      <h1 className="font-bold text-3xl">Top Courses</h1>
       <TopCourseSlider topCoursesData={topCoursesData} />
     </div>
   );

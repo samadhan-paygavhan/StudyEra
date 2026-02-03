@@ -5,9 +5,7 @@ import ExploreAndFooter from "../../components/common/ExploreAndFooter";
 const SignupPage = () => {
   return (
     <>
-      <Navbar />
       <h1>SignupPage</h1>
-      <ExploreAndFooter />
     </>
   );
 };

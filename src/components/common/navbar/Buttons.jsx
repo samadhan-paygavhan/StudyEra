@@ -10,6 +10,10 @@ const Buttons = () => {
     },
 
     {
+      name: "Courses",
+    },
+
+    {
       name: "Instructor",
     },
 
@@ -27,7 +31,7 @@ const Buttons = () => {
   ];
   return (
     <>
-      <div className="hidden lg:flex items-center gap-1">
+      <div className="hidden lg:flex items-center">
         {buttonName.map((button, idx) => {
           return <Button btnName={button.name} key={idx} />;
         })}

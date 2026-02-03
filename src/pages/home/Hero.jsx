@@ -1,33 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
-
-// Import images
-import webDev from "../../assets/images/Web Development.png";
-import dataScience from "../../assets/images/Data Science.png";
-import ml from "../../assets/images/Machine Learning.png";
-import cyber from "../../assets/images/Cyber Security.png";
+import sliderImages from "../../assets/images/sliderImages";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const sliderData = [
     {
-      img: webDev,
+      img: sliderImages[0],
       title: "Web Development",
       desc: "Build modern, responsive websites with the MERN stack.",
     },
     {
-      img: dataScience,
-      title: "Data Science",
-      desc: "Analyze complex data and build predictive models.",
-    },
-    {
-      img: ml,
+      img: sliderImages[1],
       title: "Machine Learning",
       desc: "Train intelligent algorithms to solve real-world problems.",
     },
     {
-      img: cyber,
+      img: sliderImages[2],
+      title: "Data Science",
+      desc: "Analyze complex data and build predictive models.",
+    },
+    {
+      img: sliderImages[3],
       title: "Cyber Security",
       desc: "Protect digital assets and master ethical hacking.",
     },
@@ -47,7 +42,7 @@ const Hero = () => {
   }, [currentIndex]);
 
   return (
-    <section className=" flex md:min-h-[80vh] items-center bg-[#fcfcfd] overflow-hidden relative max-sm:items-center max-sm:h-[35vh]">
+    <section className="pt-[5vh] flex md:min-h-[85vh] items-center bg-[#fcfcfd] overflow-hidden relative max-sm:items-center max-sm:h-[35vh]">
       <div className="absolute top-[-20%] left-[-5%] w-[400px] h-[400px] bg-[#483D8B]/5 rounded-full blur-3xl -z-10"></div>
 
       <div className="flex flex-row items-center w-full max-w-[1440px] mx-auto px-6 max-sm:px-0 max-sm:mx-0 lg:px-12 gap-10 ">
@@ -71,7 +66,7 @@ const Hero = () => {
 
             <div className="flex gap-5">
               <button className="bg-[#483D8B] hover:bg-[#3b3272] text-white px-10 py-4 rounded-xl font-bold transition-all transform hover:translate-y-[-2px] hover:shadow-xl shadow-indigo-200">
-                Get Started
+                Enroll Now
               </button>
               <button className="bg-transparent border-2 border-gray-200 hover:border-[#483D8B] hover:text-[#483D8B] text-gray-700 px-8 py-4 rounded-xl font-bold transition-all">
                 View Syllabus
@@ -81,7 +76,7 @@ const Hero = () => {
         </div>
 
         {/* RIGHT SIDE: IMAGE SLIDER */}
-        <div className="w-full xl:w-[55%] flex items-center relative sm:h-[60vh]">
+        <div className="w-full xl:w-[55%] flex items-center relative sm:h-[50vh]">
           <button
             onClick={prevSlide}
             className="hidden md:block absolute left-4 z-20 bg-white/90 p-3 rounded-full shadow-lg text-[#483D8B] hover:bg-[#483D8B] hover:text-white transition-all active:scale-90"
@@ -89,7 +84,7 @@ const Hero = () => {
             <FaAngleLeft size={22} />
           </button>
 
-          <div className="md:h-[520px] w-full overflow-hidden shadow-[0_20px_50px_rgba(72,61,139,0.15)] bg-white relative rounded-[2rem] border-5 border-[#F3F4F6] transition-all hover:shadow-2xl sm:h-[50vh] max-sm:h-[30vh]">
+          <div className="md:h-[520px] w-full overflow-hidden bg-white relative rounded-[2rem] border-5 border-[#F3F4F6] sm:h-[50vh] max-sm:h-[30vh]">
             <img
               key={currentIndex}
               src={sliderData[currentIndex].img}

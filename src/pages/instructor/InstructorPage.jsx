@@ -8,11 +8,9 @@ import ExploreAndFooter from "../../components/common/ExploreAndFooter";
 const InstructorPage = () => {
   return (
     <>
-      <Navbar />
       <Hero />
       <RightSection />
       <LeftSection />
-      <ExploreAndFooter />
     </>
   );
 };
