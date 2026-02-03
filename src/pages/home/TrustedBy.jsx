@@ -3,8 +3,8 @@ import comLogo from "../../assets/images/comLogo";
 
 const TrustedBy = () => {
   return (
-    <section className="bg-[#fcfcfd] py-25 max-sm:py-2 flex flex-col items-center px-6 sm:px-12 lg:px-24">
-      <h3 className="font-semibold text-gray-600 text-sm uppercase tracking-[0.2em] mb-15">
+    <section className="bg-[#fcfcfd] py-25 max-sm:py-17 flex flex-col items-center px-6 sm:px-12 lg:px-24">
+      <h3 className="font-semibold text-gray-600 text-sm uppercase tracking-[0.2em] mb-10">
         Trusted by{" "}
         <span className="text-[#362b79] font-bold">Leading Tech Partners</span>
       </h3>

@@ -1,5 +1,4 @@
 import React from "react";
-import { CgProfile } from "react-icons/cg";
 
 const Testimonials = () => {
   const reviews = [
@@ -59,7 +58,6 @@ const Testimonials = () => {
                 "{review.text}"
               </p>
 
-              {/* Bottom accent line */}
               <div className="mt-6 w-10 h-1 bg-[#483D8B] rounded-full group-hover:w-full transition-all duration-500"></div>
             </div>
           ))}

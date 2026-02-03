@@ -28,7 +28,7 @@ const TopCourseSlider = ({ topCoursesData }) => {
     <div className="w-full max-w-6xl px-16 mx-auto">
       <Slider {...settings}>
         {topCoursesData.map((d, index) => {
-          return <Card key={index} course={d} />;
+          return <Card key={index} coursesData={d} />;
         })}
       </Slider>
     </div>
