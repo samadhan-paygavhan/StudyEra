@@ -14,12 +14,6 @@ const Testimonials = () => {
       text: "The MERN stack roadmap is the best I've found online. Very easy to follow and professional.",
       image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sneha",
     },
-    {
-      name: "Rahul Verma",
-      role: "ML Enthusiast",
-      text: "The AI courses here are top-notch. I highly recommend StudyEra to all my college friends.",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul",
-    },
   ];
 
   return (
@@ -34,7 +28,7 @@ const Testimonials = () => {
           about their learning journey.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-center gap-8">
           {reviews.map((review, index) => (
             <div
               key={index}

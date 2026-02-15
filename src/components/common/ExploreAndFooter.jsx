@@ -124,7 +124,7 @@ const ExploreAndFooter = () => {
     width < 1024 ? courseDetail.slice(0, 2) : courseDetail;
 
   return (
-    <section className="mt-10 bg-[#1A1939] text-[#e1e1e1] px-6 lg:px-16 py-12 w-full">
+    <section className="bg-[#1A1939] text-[#e1e1e1] px-6 lg:px-16 py-12 w-full">
       <div className="max-w-[1440px] mx-auto">
         <h2
           className="font-black text-3xl mb-10 border-[#483D8B] pb-4 

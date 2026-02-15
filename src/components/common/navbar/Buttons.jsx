@@ -1,32 +1,39 @@
 import React, { useState } from "react";
 import Button from "../Button";
 import { IoReorderThreeOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Buttons = () => {
   const [toggle, setToggle] = useState(false);
   const buttonName = [
     {
       name: "Home",
+      route: "",
     },
 
     {
       name: "Courses",
+      route: "courses",
     },
 
     {
       name: "Instructor",
+      route: "instructor",
     },
 
     {
       name: "About",
+      route: "about",
     },
 
     {
       name: "Login",
+      route: "login",
     },
 
     {
       name: "SignUp",
+      route: "signup",
     },
   ];
   return (
@@ -40,19 +47,21 @@ const Buttons = () => {
       <div className="lg:hidden max-sm:flex items-center">
         <div className="flex items-center p-2 rounded-lg transition-all duration-200 hover:bg-gray-100 active:bg-gray-200 active:scale-90 group">
           <IoReorderThreeOutline
-            className="text-[2.5rem] text-[#1A1939] group-hover:text-[#483D8B] transition-colors"
+            className="text-[2.5rem] text-[#09090f] group-hover:text-[#483D8B] transition-colors"
             onClick={() => setToggle(!toggle)}
           />
         </div>
         {toggle ? (
           <div className="absolute top-[85px] right-[2rem] w-[200px] bg-white border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.12)] rounded-2xl py-3 z-[2000] animate-fade-in origin-top-right">
             {buttonName.map((btn, idx) => (
-              <button
+              <Link
                 key={idx}
-                className="w-full h-[48px] px-6 text-left text-[1rem] text-[#1A1939] font-medium bg-transparent border-l-4 border-transparent transition-all duration-200 hover:bg-[#cfcbeb]/30 hover:text-[#483D8B] hover:border-[#483D8B] hover:pl-8 active:scale-95"
+                to={`/${btn.route}`}
+                onClick={() => setToggle(false)} // Close menu on click
+                className="flex items-center w-full h-[48px] px-6 text-[1rem] text-[#1A1939] font-medium border-l-4 border-transparent transition-all duration-200 hover:bg-[#cfcbeb]/30 hover:text-[#483D8B] hover:border-[#483D8B] hover:pl-8 active:scale-95"
               >
                 {btn.name}
-              </button>
+              </Link>
             ))}
           </div>
         ) : null}
