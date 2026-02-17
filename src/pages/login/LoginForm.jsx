@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle, FaFacebookF } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Eye, EyeOff } from "lucide-react";
+import { toast } from "sonner";
+import { getData } from "@/context/userContext";
 
 const LoginForm = () => {
+  const { setUser } = getData();
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
   const {
     register,
     handleSubmit,
@@ -12,12 +21,27 @@ const LoginForm = () => {
   } = useForm();
 
   const formSubmit = async (data) => {
-    const URL = "http://localhost:8080/api/signup";
-    await axios.get(URL, data);
-    console.log(data);
+    try {
+      const URL = "http://localhost:8080/login";
+      const res = await axios.post(URL, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res);
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+        setUser(res.data.user);
+        localStorage.setItem("accessToken", res.data.accessToken);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
-    <div className="w-full md:w-1/2 flex flex-col justify-center px-10 py-10 lg:px-20 bg-[#fcfcfd]">
+    <div className="w-[400px] md:w-1/2 flex flex-col justify-start px-10 py-15 lg:px-20 bg-[#fcfcfd]">
       <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-8 text-center md:text-left">
         Welcome Back!
       </h2>
@@ -41,20 +65,30 @@ const LoginForm = () => {
           )}
         </div>
 
-        <div>
+        <div className="relative">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Enter Password"
             className={`h-14 w-full px-4 rounded-lg bg-gray-100 border border-gray-200 focus:border-[#6a5acd] focus:ring-1 focus:ring-[#6a5acd] outline-none font-medium transition-all
             ${errors.password ? "border-red-500" : ""}`}
             {...register("password", { required: "Password is required" })}
           />
+          <button
+            type="button"
+            onClick={handleShowPassword}
+            className="absolute right-3 top-4 text-gray-400 hover:text-[#6a5acd] transition-colors"
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
 
           {errors.password && (
             <p className="text-red-400 text-xs mt-1 ml-1">
               {errors.password.message}
             </p>
           )}
+          <Link to={"/forgot-password"} className="text-gray-700 mx-1">
+            Forgot your password?
+          </Link>
         </div>
 
         <button
@@ -62,7 +96,7 @@ const LoginForm = () => {
           className="h-12 w-full mt-4 bg-[#483D8B] hover:bg-[#6a5acd] text-white font-bold rounded-lg transition-colors shadow-lg shadow-indigo-200"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Logging in..." : "Login"}
+          {isSubmitting ? "Logging into your account.." : "Login"}
         </button>
       </form>
 

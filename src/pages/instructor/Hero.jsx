@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
 
 const Hero = () => {
-  return (
-    <div>Hero</div>
-  )
-}
+  //   const { user } = getData();
+  return <div className="h-screen"></div>;
+};
 
 export default Hero;

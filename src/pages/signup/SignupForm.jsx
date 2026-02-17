@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle, FaFacebookF } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Eye, EyeOff } from "lucide-react";
+import { toast } from "sonner";
 
 const SignupForm = () => {
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
   const {
     register,
     handleSubmit,
@@ -12,13 +19,25 @@ const SignupForm = () => {
   } = useForm();
 
   const formSubmit = async (data) => {
-    const URL = "http://localhost:8080/api/signup";
-    await axios.post(URL, data);
-    console.log(data);
+    const URL = "http://localhost:8080/signup";
+    try {
+      const res = await axios.post(URL, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.data.success) {
+        navigate("/verify");
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
-    <div className="w-max-[500px] md:w-1/2 flex flex-col justify-start px-10 py-15 lg:px-20 bg-[#fcfcfd]">
+    <div className="w-100 md:w-1/2 flex flex-col justify-start px-10 py-15 lg:px-20 bg-[#fcfcfd]">
       <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-2 text-center md:text-left">
         Sign-Up To Study Era!
       </h2>
@@ -82,39 +101,9 @@ const SignupForm = () => {
           )}
         </div>
 
-        <div>
+        <div className="relative">
           <input
-            type="number"
-            placeholder="Contact Number"
-            className={`h-14 w-full px-4 rounded-lg bg-gray-100 border border-gray-200 focus:border-[#6a5acd] focus:ring-1 focus:ring-[#6a5acd] outline-none font-medium transition-all
-            ${errors.phone ? "border-red-500" : ""}`}
-            {...register("phone", {
-              required: { value: true, message: "Contact number is required" },
-              pattern: {
-                value: /^[6-9]\d{9}$/,
-                message: "Please enter a valid 10-digit Indian Contact number",
-              },
-              minLength: {
-                value: 10,
-                message: "Contact number must be exactly 10 digits",
-              },
-              maxLength: {
-                value: 10,
-                message: "Contact number cannot exceed 10 digits",
-              },
-            })}
-          />
-
-          {errors.phone && (
-            <p className="text-red-400 text-xs mt-1 ml-1">
-              {errors.phone.message}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Create Password"
             className={`h-14 w-full px-4 rounded-lg bg-gray-100 border border-gray-200 focus:border-[#6a5acd] focus:ring-1 focus:ring-[#6a5acd] outline-none font-medium transition-all
             ${errors.password ? "border-red-500" : ""}`}
@@ -133,6 +122,13 @@ const SignupForm = () => {
             })}
           />
 
+          <button
+            type="button"
+            onClick={handleShowPassword}
+            className="absolute right-3 top-4 text-gray-400 hover:text-[#6a5acd] transition-colors"
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
           {errors.password && (
             <p className="text-red-400 text-xs mt-1 ml-1 leading-tight">
               {errors.password.message}

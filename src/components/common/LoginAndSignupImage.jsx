@@ -3,7 +3,7 @@ import SignupAndLoginImage from "../../assets/SignupAndLoginImage.png";
 
 const LoginAndSignupImage = () => {
   return (
-    <div className="hidden xl:flex w-1/2 items-start justify-center bg-blue-50/30">
+    <div className="hidden xl:flex w-1/2 items-start justify-center">
       <img
         src={SignupAndLoginImage}
         alt="Study Era Illustration"

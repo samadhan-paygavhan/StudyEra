@@ -1,11 +1,53 @@
 import React, { useState } from "react";
-import Button from "../Button";
+import LocalButton from "../Button";
 import { IoReorderThreeOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { LogOut, User, Video } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import axios from "axios";
+import { getData } from "@/context/userContext";
+import { toast } from "sonner";
 
 const Buttons = () => {
+  const accessToken = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+  const { user, setUser } = getData();
   const [toggle, setToggle] = useState(false);
-  const buttonName = [
+  const logoutHandler = async () => {
+    try {
+      const res = await axios.post(
+        `http://localhost:8080/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+
+      console.log(res);
+      if (res.data.success) {
+        console.log("hello");
+        navigate("/login");
+        localStorage.clear();
+        setUser(null);
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const primaryButtonName = [
     {
       name: "Home",
       route: "",
@@ -25,7 +67,9 @@ const Buttons = () => {
       name: "About",
       route: "about",
     },
+  ];
 
+  const loginAndSignupButton = [
     {
       name: "Login",
       route: "login",
@@ -36,12 +80,54 @@ const Buttons = () => {
       route: "signup",
     },
   ];
+
   return (
     <>
       <div className="hidden lg:flex items-center">
-        {buttonName.map((button, idx) => {
-          return <Button btnName={button.name} key={idx} />;
+        {primaryButtonName.map((button, idx) => {
+          return <LocalButton btnName={button.name} key={idx} />;
         })}
+        {!user ? (
+          loginAndSignupButton.map((btn, idx) => {
+            return <LocalButton btnName={btn.name} key={idx} />;
+          })
+        ) : (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full ml-5">
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="shadcn"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-white mt-3 p-1">
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-gray-500" />
+                <DropdownMenuItem className="hover:bg-gray-100">
+                  <User />
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-gray-100">
+                  <Video />
+                  My Batch
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator className="bg-gray-300" />
+              <DropdownMenuItem
+                className="hover:bg-gray-100"
+                onClick={logoutHandler}
+              >
+                <LogOut />
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
 
       <div className="lg:hidden max-sm:flex items-center">
@@ -53,7 +139,7 @@ const Buttons = () => {
         </div>
         {toggle ? (
           <div className="absolute top-[85px] right-[2rem] w-[200px] bg-white border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.12)] rounded-2xl py-3 z-[2000] animate-fade-in origin-top-right">
-            {buttonName.map((btn, idx) => (
+            {primaryButtonName.map((btn, idx) => (
               <Link
                 key={idx}
                 to={`/${btn.route}`}

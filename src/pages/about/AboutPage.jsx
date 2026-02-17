@@ -8,9 +8,11 @@ import ExploreAndFooter from "../../components/common/ExploreAndFooter";
 const About = () => {
   return (
     <>
+      <Navbar />
       <Hero />
       <OurMission />
       <WhyWeAreDifferent />
+      <ExploreAndFooter />
     </>
   );
 };
