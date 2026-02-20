@@ -35,9 +35,7 @@ const Buttons = () => {
         },
       );
 
-      console.log(res);
       if (res.data.success) {
-        console.log("hello");
         navigate("/login");
         localStorage.clear();
         setUser(null);
@@ -95,7 +93,7 @@ const Buttons = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="rounded-full ml-5">
-                <Avatar>
+                <Avatar className="h-8 w-8">
                   <AvatarImage
                     src="https://github.com/shadcn.png"
                     alt="shadcn"

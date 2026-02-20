@@ -8,8 +8,6 @@ import MyBatchPage from "./pages/my-batch/MyBatchPage";
 import InstructorPage from "./pages/instructor/InstructorPage";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/common/navbar/Navbar";
-import ExploreAndFooter from "./components/common/ExploreAndFooter";
 import NotFound from "./pages/NotFound";
 import VerifyEmail from "./pages/VerifyEmail";
 import Verify from "./pages/verify";
@@ -18,22 +16,23 @@ import Logout from "./pages/Logout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import VerifyOTP from "./pages/VerifyOTP";
 import ChangePassword from "./pages/ChangePassword";
+import CourseDetailPage from "./pages/course-detail/CourseDetailPage";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/courses" element={<CoursesPage />} />
           <Route
-            path="/"
+            path="/batch"
             element={
               <ProtectedRoute>
-                <HomePage />
+                <MyBatchPage />
               </ProtectedRoute>
             }
           />
-          <Route path="/courses" element={<CoursesPage />} />
-          <Route path="/batch" element={<MyBatchPage />} />
           <Route path="/instructor" element={<InstructorPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -43,7 +42,15 @@ function App() {
           <Route path="/verify-otp/:email" element={<VerifyOTP />} />
           <Route path="/change-password/:email" element={<ChangePassword />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/courses/:course-id" element={<CourseDetailPage />} />
+          <Route
+            path="/logout"
+            element={
+              <ProtectedRoute>
+                <Logout />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

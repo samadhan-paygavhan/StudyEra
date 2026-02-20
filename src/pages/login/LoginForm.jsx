@@ -28,7 +28,6 @@ const LoginForm = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
 
       if (res.data.success) {
         toast.success(res.data.message);

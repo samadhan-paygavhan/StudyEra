@@ -6,7 +6,8 @@ const Button = ({ btnName }) => {
     if (btnName === "SignUp") return "/signup";
     if (btnName === "Login") return "/login";
     if (btnName === "Home") return "/";
-    if (btnName === "Enroll Now" || btnName === "View More") return "/x";
+    if (btnName === "View More") return "/courses/course-id";
+    if (btnName === "Enroll Now") return "/enroll/:course-id";
     return `/${btnName.toLowerCase()}`;
   };
 

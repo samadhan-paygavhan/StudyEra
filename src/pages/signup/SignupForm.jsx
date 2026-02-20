@@ -32,7 +32,7 @@ const SignupForm = () => {
         toast.success(res.data.message);
       }
     } catch (error) {
-      console.log(error.message);
+      console.log("Frontend", error.message);
     }
   };
 
