@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import VerifyOTP from "./pages/VerifyOTP";
 import ChangePassword from "./pages/ChangePassword";
 import CourseDetailPage from "./pages/course-detail/CourseDetailPage";
+import EnrollPage from "./pages/enroll/EnrollPage";
 
 function App() {
   return (
@@ -43,6 +44,14 @@ function App() {
           <Route path="/change-password/:email" element={<ChangePassword />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/courses/:course-id" element={<CourseDetailPage />} />
+          <Route
+            path="/enroll/:course-id"
+            element={
+              <ProtectedRoute>
+                <EnrollPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/logout"
             element={

@@ -100,7 +100,7 @@ const UploadCourseForm = () => {
       </div>
 
       {/* ROW 3: Category & Price */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1">
         <div>
           <label className="text-sm font-semibold text-gray-700 ml-1">
             Category
@@ -123,16 +123,35 @@ const UploadCourseForm = () => {
             </p>
           )}
         </div>
+      </div>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="text-sm font-semibold text-gray-700 ml-1">
-            Price (₹)
+            Actual Price (₹)
           </label>
           <input
             type="number"
             {...register("price", { required: "Price is required" })}
             className="w-full h-12 px-4 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#6a5acd] outline-none mt-2"
-            placeholder="e.g. 499"
+            placeholder="e.g. 1999"
+          />
+          {errors.topics && (
+            <p className="text-red-500 text-xs mt-1 ml-1 flex items-center gap-1">
+              <span className="font-bold">!</span> {errors.price.message}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label className="text-sm font-semibold text-gray-700 ml-1">
+            Discounted Price (₹)
+          </label>
+          <input
+            type="number"
+            {...register("price", { required: "Price is required" })}
+            className="w-full h-12 px-4 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#6a5acd] outline-none mt-2"
+            placeholder="e.g. 1499"
           />
           {errors.topics && (
             <p className="text-red-500 text-xs mt-1 ml-1 flex items-center gap-1">
@@ -143,24 +162,7 @@ const UploadCourseForm = () => {
       </div>
 
       {/* LISTS: Topics & Learning Points */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="text-sm font-semibold text-gray-700 ml-1">
-            Main Topics (Comma separated, Max 4)
-          </label>
-          <textarea
-            {...register("topics", {
-              required: "At least one topic is required",
-            })}
-            placeholder="React, Node, MongoDB, Express"
-            className="w-full p-4 rounded-lg bg-gray-50 border border-gray-200 h-24 mt-2"
-          />
-          {errors.topics && (
-            <p className="text-red-500 text-xs mt-1 ml-1 flex items-center gap-1">
-              <span className="font-bold">!</span> {errors.topics.message}
-            </p>
-          )}
-        </div>
+      <div className="grid grid-cols-1">
         <div>
           <label className="text-sm font-semibold text-gray-700 ml-1">
             What students will learn (Max 4)

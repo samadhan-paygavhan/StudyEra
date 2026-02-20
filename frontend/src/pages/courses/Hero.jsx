@@ -12,7 +12,7 @@ const Hero = () => {
       id: 1,
       image: courseImages[0],
       title: "Full Stack",
-      category: "fullStack",
+      category: "development",
       description: "The course is best for freshers",
     },
 
@@ -35,8 +35,8 @@ const Hero = () => {
 
   const courseCategory = [
     { name: "All", category: "all", id: 1 },
-    { name: "Full Stack", category: "fullStack", id: 2 },
-    { name: "Machine Learning", category: "machineLearning", id: 3 },
+    { name: "Development", category: "development", id: 2 },
+    { name: "AI/ML", category: "aiml", id: 3 },
     { name: "Data Science", category: "dataScience", id: 4 },
     { name: "Cyber Security", category: "cyberSecurity", id: 5 },
   ];

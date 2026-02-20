@@ -30,7 +30,7 @@ const InstructorLogin = ({ user }) => {
 
   return (
     <div className="flex min-h-[calc(100vh-64px)] bg-gray-50">
-      <div className="hidden w-72 mx-auto bg-white border-r border-gray-200 py-4 md:block">
+      <div className="hidden w-60 mx-auto bg-white border-r border-gray-200 py-4 md:block">
         <h2 className="text-[16px] font-semibold text-gray-500 uppercase tracking-wider mb-4 px-2">
           {user.fullName}
         </h2>
