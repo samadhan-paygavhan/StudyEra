@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaGoogle, FaFacebookF } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
@@ -157,14 +157,9 @@ const SignupForm = () => {
       </div>
 
       <div className="flex justify-center gap-10">
-        {[<FaGoogle />, <FaFacebookF />].map((brand, index) => (
-          <button
-            key={index}
-            className="w-12 h-12 flex items-center justify-center border-2 border-[#483D8B] rounded-xl hover:bg-indigo-50 transition-colors text-gray-700 opacity-80"
-          >
-            {brand}
-          </button>
-        ))}
+        <button className="w-full h-12 flex items-center justify-center border-2 border-[#483D8B] rounded-xl hover:bg-indigo-50 transition-colors text-gray-700 opacity-80">
+          Continue with Google &nbsp; {<FaGoogle />}
+        </button>
       </div>
 
       <div className="mt-10 p-4 bg-gray-200 rounded-xl text-center transition-all hover:bg-gray-300">

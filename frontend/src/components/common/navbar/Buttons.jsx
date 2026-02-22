@@ -93,9 +93,9 @@ const Buttons = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="rounded-full ml-5">
-                <Avatar className="h-8 w-8">
+                <Avatar className="h-10 w-10">
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
+                    src={user.avatar || "https://github.com/shadcn.png"}
                     alt="shadcn"
                   />
                   <AvatarFallback>CN</AvatarFallback>

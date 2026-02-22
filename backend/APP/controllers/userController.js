@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { verifyMail } from "../Email-Verify/verifyMail.js";
-import sessionModel from "../modules/sessionModel.js";
-import userModel from "../modules/userModel.js";
+import sessionModel from "../models/sessionModel.js";
+import userModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { sendOtpMail } from "../Email-Verify/sendOtpMail.js";

@@ -1,8 +1,10 @@
 import express from "express";
 import "dotenv/config";
 import connectDB from "./App/database/db.js";
-import router from "./App/routes/userRoute.js";
+import userRouter from "./App/routes/userRoute.js";
+import authRouter from "./APP/routes/authRoute.js";
 import cors from "cors";
+import "./APP/config/passport.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,7 +17,8 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(router);
+app.use(userRouter);
+app.use(authRouter);
 
 app.listen(PORT, () => {
   connectDB();

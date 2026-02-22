@@ -9,17 +9,19 @@ export const UserProvider = ({ children }) => {
     const fetchUser = async () => {
       const token = localStorage.getItem("accessToken");
 
-      try {
-        const res = await axios.get("http://localhost:8080/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+      if (token) {
+        try {
+          const res = await axios.get("http://localhost:8080/me", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
 
-        if (res.data.success) {
-          setUser(res.data.user);
+          if (res.data.success) {
+            setUser(res.data.user);
+          }
+        } catch (err) {
+          localStorage.removeItem("accessToken");
+          setUser(null);
         }
-      } catch (err) {
-        localStorage.removeItem("accessToken"); // Don't clear everything, just the session
-        setUser(null);
       }
     };
     fetchUser();
