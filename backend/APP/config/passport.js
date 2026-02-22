@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import User from "../models/userModel.js";
+import Session from "../models/sessionModel.js";
 
 passport.use(
   new GoogleStrategy(
@@ -26,6 +27,18 @@ passport.use(
             avatar: profile.photos[0].value,
             isLoggedIn: true,
             isVerified: true,
+          });
+
+          const existingSession = await Session.findOne({
+            userId: user._id,
+          });
+          if (existingSession) {
+            await Session.deleteOne({ userId: user._id });
+          }
+
+          // Create a new session
+          await Session.create({
+            userId: user._id,
           });
         }
 

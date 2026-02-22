@@ -1,42 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import courseImages from "../../assets/images/courseImages";
 import Card from "../../components/common/Card";
+import axios from "axios";
 
 const Hero = () => {
   const [activeTab, setActiveTab] = useState("all");
+  const [coursesData, setCoursesData] = useState([]);
 
-  console.log(activeTab);
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/courses");
+        console.log(response.data.courses[0]);
+        setCoursesData(response.data.courses);
+      } catch (error) {
+        console.error("Failed to fetch courses:", error);
+      }
+    };
 
-  const coursesData = [
-    {
-      id: 1,
-      image: courseImages[0],
-      title: "Full Stack",
-      category: "development",
-      description: "The course is best for freshers",
-    },
-
-    {
-      id: 2,
-      image: courseImages[1],
-      title: "Data Science",
-      category: "dataScience",
-      description: "Master Python and ML",
-    },
-
-    {
-      id: 3,
-      image: courseImages[3],
-      title: "DevOps",
-      category: "cloudComputing",
-      description: "Learn CI/CD and Cloud",
-    },
-  ];
+    fetchCourses();
+  }, []);
 
   const courseCategory = [
     { name: "All", category: "all", id: 1 },
-    { name: "Development", category: "development", id: 2 },
-    { name: "AI/ML", category: "aiml", id: 3 },
+    { name: "Development", category: "web-dev", id: 2 },
+    { name: "AI/ML", category: "ai-ml", id: 3 },
     { name: "Data Science", category: "dataScience", id: 4 },
     { name: "Cyber Security", category: "cyberSecurity", id: 5 },
   ];
@@ -48,8 +36,6 @@ const Hero = () => {
 
     return course.category === activeTab;
   });
-
-  console.log(activeCategoryCourse);
 
   return (
     <section className="bg-[#fcfcfd] min-h-[90vh] w-full flex justify-center items-start px-6 py-16">

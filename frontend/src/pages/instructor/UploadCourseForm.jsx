@@ -1,3 +1,5 @@
+import { getData } from "@/context/userContext";
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -8,9 +10,46 @@ const UploadCourseForm = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const formSubmit = (data) => {
-    console.log(data);
+  const userData = getData();
+  console.log(userData.user._id);
+
+  const formSubmit = async (data) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("title", data.title);
+      formData.append("description", data.description);
+      formData.append("category", data.category);
+      formData.append("price", data.price);
+      formData.append("discountedPrice", data.discountedPrice);
+      formData.append("learningPoints", data.learningPoints);
+
+      if (data.banner[0]) {
+        formData.append("banner", data.banner[0]);
+      }
+      if (data.video[0]) {
+        formData.append("video", data.video[0]);
+      }
+
+      console.log(data);
+
+      const res = await axios.post(
+        `http://localhost:8080/course-upload/${userData.user._id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+
+      console.log("Upload Success:", res.data);
+      alert("Course uploaded successfully!");
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+    }
   };
+
   return (
     <form
       onSubmit={handleSubmit(formSubmit)}
@@ -99,7 +138,6 @@ const UploadCourseForm = () => {
         )}
       </div>
 
-      {/* ROW 3: Category & Price */}
       <div className="grid grid-cols-1">
         <div>
           <label className="text-sm font-semibold text-gray-700 ml-1">
@@ -113,8 +151,9 @@ const UploadCourseForm = () => {
           >
             <option value="">Select Category</option>
             <option value="web-dev">Web Development</option>
-            <option value="cyber">Cyber Security</option>
-            <option value="cloud">Cloud Engineering</option>
+            <option value="ai-ml">AI-ML</option>
+            <option value="dataScience">Data Science</option>
+            <option value="cyberSecurity">Cyber Security</option>
           </select>
 
           {errors.topics && (
@@ -149,13 +188,15 @@ const UploadCourseForm = () => {
           </label>
           <input
             type="number"
-            {...register("price", { required: "Price is required" })}
+            {...register("discountedPrice", {
+              required: "Discounted Price is required",
+            })}
             className="w-full h-12 px-4 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#6a5acd] outline-none mt-2"
             placeholder="e.g. 1499"
           />
           {errors.topics && (
             <p className="text-red-500 text-xs mt-1 ml-1 flex items-center gap-1">
-              <span className="font-bold">!</span> {errors.price.message}
+              <span className="font-bold">!</span> {errors.discounted.message}
             </p>
           )}
         </div>
@@ -204,8 +245,9 @@ const UploadCourseForm = () => {
       <button
         type="submit"
         className="w-full h-14 bg-[#6a5acd] text-white font-bold rounded-xl shadow-lg hover:bg-[#483D8B] transition-all transform active:scale-95"
+        disabled={isSubmitting}
       >
-        Launch Study Era Course
+        {isSubmitting ? "Launch Study Era Course" : "Course Uploading"}
       </button>
     </form>
   );

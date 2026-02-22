@@ -27,8 +27,8 @@ const TopCourseSlider = ({ topCoursesData }) => {
   return (
     <div className="w-full max-w-6xl px-16 mx-auto">
       <Slider {...settings}>
-        {topCoursesData.map((d, index) => {
-          return <Card key={index} coursesData={d} />;
+        {topCoursesData.map((course) => {
+          return <Card key={course._id} coursesData={course} />;
         })}
       </Slider>
     </div>

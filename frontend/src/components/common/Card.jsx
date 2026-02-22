@@ -1,13 +1,18 @@
 import React from "react";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ coursesData }) => {
+  const navigate = useNavigate();
+  const handleNavigate = (id) => {
+    navigate(`/course/${id}`);
+  };
   return (
     <div className="px-2 pb-5 outline-none transition-all duration-300 hover:translate-y-[-2px]">
       <div className="max-w-[295px] w-full h-[370px] mx-auto flex flex-col bg-white border rounded-lg overflow-hidden shadow-sm">
         <div className="h-45 flex flex-shrink-0 items-center justify-center font-bold">
           <img
-            src={coursesData.image}
+            src={coursesData.banner.url}
             alt=""
             className="h-full w-full object-cover"
           />
@@ -21,8 +26,8 @@ const Card = ({ coursesData }) => {
           </p>
 
           <div className="mt-auto flex justify-around items-center pb-2">
-            <Button btnName="View More" />
-            <Button btnName="Enroll Now" />
+            <Button btnName="View More" url={`/courses/${coursesData._id}`} />
+            <Button btnName="Enroll Now" url={`/enroll/${coursesData._id}`} />
           </div>
         </div>
       </div>

@@ -1,33 +1,47 @@
-import React from "react";
-import Navbar from "../../components/common/navbar/Navbar";
+import Navbar from "@/components/common/navbar/Navbar";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Hero from "./Hero";
 import CourseInfoVideo from "./CourseInfoVideo";
-import ExploreAndFooter from "../../components/common/ExploreAndFooter";
+import ExploreAndFooter from "@/components/common/ExploreAndFooter";
 
 const CourseDetailPage = () => {
-  const data = [
-    {
-      title: "Full Stack Web Development",
-      img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
-      description:
-        "Master Frontend, Backend, and Databases to become a job-ready developer.",
-      category: "Development",
-      actualPrice: 2000,
-      withDiscountPrice: 1499,
-      whatUserLearn: [
-        { name: "Modern Frontend (React & Tailwind)", id: 1 },
-        { name: "Node.js & Express APIs", id: 2 },
-        { name: "MongoDB & PostgreSQL", id: 3 },
-        { name: "JWT Authentication", id: 4 },
-      ],
-      video: "",
-    },
-  ];
+  const [courseDetail, setCourseDetail] = useState(null); // Changed to null
+  const { courseId } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/courses/${courseId}`,
+        );
+        if (response.data.success) {
+          setCourseDetail(response.data.course);
+        }
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    };
+
+    if (courseId) fetchData();
+  }, [courseId]); // Added courseId dependency
+
+  // Guard clause: Show a loader until data is fetched
+  if (!courseDetail) {
+    return (
+      <div className="h-screen flex items-center justify-center text-xl">
+        Loading Course Details...
+      </div>
+    );
+  }
+
   return (
     <>
       <Navbar />
-      <Hero data={data} />
-      <CourseInfoVideo video={data[0].video} />
+      <Hero data={courseDetail} />
+      {/* Added optional chaining ?. to prevent crash if video is missing */}
+      <CourseInfoVideo video={courseDetail.video?.url} />
       <ExploreAndFooter />
     </>
   );

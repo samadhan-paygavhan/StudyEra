@@ -48,34 +48,34 @@ const Buttons = () => {
   const primaryButtonName = [
     {
       name: "Home",
-      route: "",
+      route: "/",
     },
 
     {
       name: "Courses",
-      route: "courses",
+      route: "/courses",
     },
 
     {
       name: "Instructor",
-      route: "instructor",
+      route: "/instructor",
     },
 
     {
       name: "About",
-      route: "about",
+      route: "/about",
     },
   ];
 
   const loginAndSignupButton = [
     {
       name: "Login",
-      route: "login",
+      route: "/login",
     },
 
     {
       name: "SignUp",
-      route: "signup",
+      route: "/signup",
     },
   ];
 
@@ -83,11 +83,13 @@ const Buttons = () => {
     <>
       <div className="hidden lg:flex items-center">
         {primaryButtonName.map((button, idx) => {
-          return <LocalButton btnName={button.name} key={idx} />;
+          return (
+            <LocalButton btnName={button.name} key={idx} url={button.route} />
+          );
         })}
         {!user ? (
           loginAndSignupButton.map((btn, idx) => {
-            return <LocalButton btnName={btn.name} key={idx} />;
+            return <LocalButton btnName={btn.name} key={idx} url={btn.route} />;
           })
         ) : (
           <DropdownMenu>
@@ -140,8 +142,8 @@ const Buttons = () => {
             {primaryButtonName.map((btn, idx) => (
               <Link
                 key={idx}
-                to={`/${btn.route}`}
-                onClick={() => setToggle(false)} // Close menu on click
+                to={`${btn.route}`}
+                onClick={() => setToggle(false)}
                 className="flex items-center w-full h-[48px] px-6 text-[1rem] text-[#1A1939] font-medium border-l-4 border-transparent transition-all duration-200 hover:bg-[#cfcbeb]/30 hover:text-[#483D8B] hover:border-[#483D8B] hover:pl-8 active:scale-95"
               >
                 {btn.name}

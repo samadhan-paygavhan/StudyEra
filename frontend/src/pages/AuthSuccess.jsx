@@ -33,7 +33,7 @@ const AuthSuccess = () => {
     handleAuth();
   });
 
-  return <div>AuthSuccess</div>;
+  return <div></div>;
 };
 
 export default AuthSuccess;

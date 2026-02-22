@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 import sliderImages from "../../assets/images/sliderImages";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   const sliderData = [
     {
@@ -65,11 +67,11 @@ const Hero = () => {
             </p>
 
             <div className="flex gap-5">
-              <button className="bg-[#483D8B] hover:bg-[#3b3272] text-white px-10 py-4 rounded-xl font-bold transition-all transform hover:translate-y-[-2px] hover:shadow-xl shadow-indigo-200">
-                Enroll Now
-              </button>
-              <button className="bg-transparent border-2 border-gray-200 hover:border-[#483D8B] hover:text-[#483D8B] text-gray-700 px-8 py-4 rounded-xl font-bold transition-all">
-                View Syllabus
+              <button
+                className="bg-[#483D8B] hover:bg-[#3b3272] text-white px-10 py-4 rounded-xl font-bold transition-all transform hover:translate-y-[-2px] hover:shadow-xl shadow-indigo-200"
+                onClick={() => navigate("/courses")}
+              >
+                Explore Courses
               </button>
             </div>
           </div>

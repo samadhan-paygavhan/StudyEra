@@ -1,35 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TopCourseSlider from "./TopCourseSlider";
-import courseImages from "../../assets/images/courseImages";
+import axios from "axios";
 
 const TopCourses = () => {
-  const topCoursesData = [
-    {
-      image: courseImages[0],
-      title: "Full Stack",
-      description: "The course is best for freshers",
-    },
-    {
-      image: courseImages[1],
-      title: "Data Science",
-      description: "Master Python and ML",
-    },
-    {
-      image: courseImages[2],
-      title: "UI/UX Design",
-      description: "Design beautiful interfaces",
-    },
-    {
-      image: courseImages[3],
-      title: "DevOps",
-      description: "Learn CI/CD and Cloud",
-    },
-  ];
+  const [coursesData, setCoursesData] = useState([]);
 
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/courses");
+        console.log(response.data.courses[0]);
+        setCoursesData(response.data.courses);
+      } catch (error) {
+        console.error("Failed to fetch courses:", error);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+  const topCoursesData = coursesData.slice(0, 4);
   return (
     <div className="py-10 bg-[#fcfcfd] flex flex-col items-center gap-15">
       <h1 className="font-bold text-3xl">Top Courses</h1>
-      <TopCourseSlider topCoursesData={topCoursesData} />
+
+      {topCoursesData.length > 0 ? (
+        <TopCourseSlider topCoursesData={topCoursesData} />
+      ) : (
+        <div className="flex flex-col items-center py-10">
+          <h2 className="text-xl text-gray-500">
+            Sorry, no courses found at the moment.
+          </h2>
+        </div>
+      )}
     </div>
   );
 };

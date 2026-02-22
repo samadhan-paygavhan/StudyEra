@@ -1,4 +1,6 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import HomePage from "./pages/home/HomePage";
 import AboutPage from "./pages/about/AboutPage";
 import CoursesPage from "./pages/courses/CoursesPage";
@@ -6,8 +8,6 @@ import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/signup/SignupPage";
 import MyBatchPage from "./pages/my-batch/MyBatchPage";
 import InstructorPage from "./pages/instructor/InstructorPage";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import VerifyEmail from "./pages/VerifyEmail";
 import Verify from "./pages/verify";
@@ -44,7 +44,7 @@ function App() {
           <Route path="/verify-otp/:email" element={<VerifyOTP />} />
           <Route path="/change-password/:email" element={<ChangePassword />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/courses/:course-id" element={<CourseDetailPage />} />
+          <Route path="/courses/:courseId" element={<CourseDetailPage />} />
           <Route path="/auth-success" element={<AuthSuccess />} />
           <Route
             path="/enroll/:course-id"
