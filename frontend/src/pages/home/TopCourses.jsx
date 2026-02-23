@@ -9,7 +9,6 @@ const TopCourses = () => {
     const fetchCourses = async () => {
       try {
         const response = await axios.get("http://localhost:8080/courses");
-        console.log(response.data.courses[0]);
         setCoursesData(response.data.courses);
       } catch (error) {
         console.error("Failed to fetch courses:", error);

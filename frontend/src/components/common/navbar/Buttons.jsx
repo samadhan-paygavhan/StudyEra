@@ -112,7 +112,10 @@ const Buttons = () => {
                   <User />
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100">
+                <DropdownMenuItem
+                  className="hover:bg-gray-100"
+                  onClick={() => navigate("/mybatch")}
+                >
                   <Video />
                   My Batch
                 </DropdownMenuItem>

@@ -19,6 +19,8 @@ import ChangePassword from "./pages/ChangePassword";
 import CourseDetailPage from "./pages/course-detail/CourseDetailPage";
 import EnrollPage from "./pages/enroll/EnrollPage";
 import AuthSuccess from "./pages/AuthSuccess";
+import Order from "./pages/Order";
+import WatchVideo from "./pages/my-batch/WatchVideo";
 
 function App() {
   return (
@@ -28,7 +30,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/courses" element={<CoursesPage />} />
           <Route
-            path="/batch"
+            path="/mybatch"
             element={
               <ProtectedRoute>
                 <MyBatchPage />
@@ -46,6 +48,22 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/courses/:courseId" element={<CourseDetailPage />} />
           <Route path="/auth-success" element={<AuthSuccess />} />
+          <Route
+            path="/mybatch/watch/:courseId"
+            element={
+              <ProtectedRoute>
+                <WatchVideo />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order/:courseId"
+            element={
+              <ProtectedRoute>
+                <Order />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/enroll/:course-id"
             element={

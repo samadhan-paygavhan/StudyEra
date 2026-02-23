@@ -7,6 +7,8 @@ import courseUpload from "./APP/routes/courseUpload.js";
 import cors from "cors";
 import "./APP/config/passport.js";
 import courseRoute from "./APP/routes/courseRoute.js";
+import order from "./APP/routes/order.js";
+import myBatch from "./APP/routes/myBatch.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,6 +25,8 @@ app.use(userRouter);
 app.use(authRouter);
 app.use(courseUpload);
 app.use(courseRoute);
+app.use(order);
+app.use(myBatch);
 
 app.listen(PORT, () => {
   connectDB();

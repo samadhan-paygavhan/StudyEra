@@ -14,8 +14,11 @@ const courseSchema = new mongoose.Schema({
     public_id: { type: String, required: true },
     url: { type: String, required: true },
   },
-
-  video: {
+  introductionVideo: {
+    public_id: { type: String },
+    url: { type: String },
+  },
+  mainVideo: {
     public_id: { type: String },
     url: { type: String },
   },
@@ -29,7 +32,7 @@ const courseSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  discontedPrice: {
+  discountedPrice: {
     type: Number,
     required: true,
     default: 0,

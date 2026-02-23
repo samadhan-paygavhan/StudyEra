@@ -12,6 +12,7 @@ export const courseUpload = async (req, res) => {
       discountedPrice,
       learningPoints,
     } = req.body;
+
     const id = req.params.userId;
 
     const existingSession = await Session.findOne({ userId: id });
@@ -23,22 +24,31 @@ export const courseUpload = async (req, res) => {
     }
 
     const bannerLocalPath = req.files?.banner?.[0]?.path;
-    const videoLocalPath = req.files?.video?.[0]?.path;
+    const introductionVideoLocalPath = req.files?.introductionVideo?.[0]?.path;
+    const mainVideoLocalPath = req.files?.mainVideo?.[0]?.path;
 
-    if (!bannerLocalPath || !videoLocalPath) {
+    if (
+      !bannerLocalPath ||
+      !introductionVideoLocalPath ||
+      !mainVideoLocalPath
+    ) {
       return res.status(400).json({
         success: false,
-        message: "Both Banner and Video files are required",
+        message: "All files are required",
       });
     }
 
     const banner = await uploadOnCloudinary(bannerLocalPath);
-    const video = await uploadOnCloudinary(videoLocalPath);
+    const introductionVideo = await uploadOnCloudinary(
+      introductionVideoLocalPath,
+    );
+    const mainVideo = await uploadOnCloudinary(mainVideoLocalPath);
 
-    if (!banner || !video) {
-      return res
-        .status(500)
-        .json({ success: false, message: "Failed to upload assets to Cloud" });
+    if (!banner || !introductionVideo || !mainVideo) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to upload assets to Cloudinary",
+      });
     }
 
     const pointsArray = learningPoints
@@ -50,15 +60,19 @@ export const courseUpload = async (req, res) => {
       description,
       category,
       price: Number(price) || 0,
-      discontedPrice: Number(discountedPrice) || 0,
+      discountedPrice: Number(discountedPrice) || 0,
       learningPoints: pointsArray,
       banner: {
         public_id: banner.public_id,
         url: banner.secure_url,
       },
-      video: {
-        public_id: video.public_id,
-        url: video.secure_url,
+      introductionVideo: {
+        public_id: introductionVideo.public_id,
+        url: introductionVideo.secure_url,
+      },
+      mainVideo: {
+        public_id: mainVideo.public_id,
+        url: mainVideo.secure_url,
       },
       createdBy: id,
     });

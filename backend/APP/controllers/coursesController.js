@@ -2,7 +2,7 @@ import { Course } from "../models/courseModel.js";
 
 export const courses = async (req, res) => {
   try {
-    const courses = await Course.find();
+    const courses = await Course.find().select("-mainVideo");
     if (!courses) {
       return res.status(400).json({
         success: false,
@@ -52,7 +52,7 @@ export const uploadedCourse = async (req, res) => {
 export const courseDetail = async (req, res) => {
   try {
     const courseId = req.params.courseId;
-    const course = await Course.findOne({ _id: courseId });
+    const course = await Course.findOne({ _id: courseId }).select("-mainVideo");
 
     if (!course) {
       return res.status(404).json({

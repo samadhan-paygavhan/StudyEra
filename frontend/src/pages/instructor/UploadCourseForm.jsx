@@ -2,6 +2,7 @@ import { getData } from "@/context/userContext";
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const UploadCourseForm = () => {
   const {
@@ -11,7 +12,6 @@ const UploadCourseForm = () => {
   } = useForm();
 
   const userData = getData();
-  console.log(userData.user._id);
 
   const formSubmit = async (data) => {
     try {
@@ -27,11 +27,12 @@ const UploadCourseForm = () => {
       if (data.banner[0]) {
         formData.append("banner", data.banner[0]);
       }
-      if (data.video[0]) {
-        formData.append("video", data.video[0]);
+      if (data.introductionVideo[0]) {
+        formData.append("introductionVideo", data.introductionVideo[0]);
       }
-
-      console.log(data);
+      if (data.mainVideo[0]) {
+        formData.append("mainVideo", data.mainVideo[0]);
+      }
 
       const res = await axios.post(
         `http://localhost:8080/course-upload/${userData.user._id}`,
@@ -47,6 +48,7 @@ const UploadCourseForm = () => {
       alert("Course uploaded successfully!");
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
+      toast.error.message();
     }
   };
 
@@ -225,13 +227,31 @@ const UploadCourseForm = () => {
       {/* VIDEO UPLOAD */}
       <div>
         <label className="text-sm font-semibold text-gray-700 ml-1">
+          Course Introduction Video
+        </label>
+        <div className="mt-2 border-2 border-dashed border-gray-200 rounded-xl p-6 flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 transition-all cursor-pointer">
+          <input
+            type="file"
+            accept="video/*"
+            {...register("introductionVideo", {
+              required: "Please upload a introduction video",
+            })}
+            className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-[#6a5acd] file:text-white"
+          />
+          <p className="text-xs text-gray-400 mt-2">
+            MP4, WebM preferred. Max size 10MB.
+          </p>
+        </div>
+      </div>
+      <div>
+        <label className="text-sm font-semibold text-gray-700 ml-1">
           Video Lecture (One Shot Main Content)
         </label>
         <div className="mt-2 border-2 border-dashed border-gray-200 rounded-xl p-6 flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 transition-all cursor-pointer">
           <input
             type="file"
             accept="video/*"
-            {...register("video", {
+            {...register("mainVideo", {
               required: "Please upload a lecture video",
             })}
             className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-[#6a5acd] file:text-white"
@@ -247,7 +267,7 @@ const UploadCourseForm = () => {
         className="w-full h-14 bg-[#6a5acd] text-white font-bold rounded-xl shadow-lg hover:bg-[#483D8B] transition-all transform active:scale-95"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Launch Study Era Course" : "Course Uploading"}
+        {!isSubmitting ? "Launch Study Era Course" : "Course Uploading"}
       </button>
     </form>
   );

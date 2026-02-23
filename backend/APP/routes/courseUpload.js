@@ -8,7 +8,8 @@ router.post(
   "/course-upload/:userId",
   upload.fields([
     { name: "banner", maxCount: 1 },
-    { name: "video", maxCount: 1 },
+    { name: "introductionVideo", maxCount: 1 },
+    { name: "mainVideo", maxCount: 1 },
   ]),
   courseUpload,
 );

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Button = ({ btnName, url }) => {
   const safeUrl = url || "/";
-  const isPrimary = ["SignUp", "Enroll Now", "View More"].includes(btnName);
+  const isPrimary = ["SignUp"].includes(btnName);
   const isLogin = "Login" === btnName;
   return (
     <>

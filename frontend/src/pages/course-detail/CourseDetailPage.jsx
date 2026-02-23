@@ -7,7 +7,7 @@ import CourseInfoVideo from "./CourseInfoVideo";
 import ExploreAndFooter from "@/components/common/ExploreAndFooter";
 
 const CourseDetailPage = () => {
-  const [courseDetail, setCourseDetail] = useState(null); // Changed to null
+  const [courseDetail, setCourseDetail] = useState(null);
   const { courseId } = useParams();
 
   useEffect(() => {
@@ -25,9 +25,8 @@ const CourseDetailPage = () => {
     };
 
     if (courseId) fetchData();
-  }, [courseId]); // Added courseId dependency
+  }, [courseId]);
 
-  // Guard clause: Show a loader until data is fetched
   if (!courseDetail) {
     return (
       <div className="h-screen flex items-center justify-center text-xl">
@@ -36,12 +35,16 @@ const CourseDetailPage = () => {
     );
   }
 
+  console.log(courseDetail);
+
   return (
     <>
       <Navbar />
       <Hero data={courseDetail} />
       {/* Added optional chaining ?. to prevent crash if video is missing */}
-      <CourseInfoVideo video={courseDetail.video?.url} />
+      <CourseInfoVideo
+        introductionVideo={courseDetail.introductionVideo?.url}
+      />
       <ExploreAndFooter />
     </>
   );
