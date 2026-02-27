@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 import sliderImages from "../../assets/images/sliderImages";
 import { useNavigate } from "react-router-dom";
+import TypingEffect from "./TypingEffect";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -62,9 +63,7 @@ const Hero = () => {
               </span>
             </h1>
 
-            <p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-[90%] border-l-4 border-[#483D8B]/20 pl-6">
-              {sliderData[currentIndex].desc}
-            </p>
+            <TypingEffect text={sliderData[currentIndex].desc} delay={50} />
 
             <div className="flex gap-5">
               <button

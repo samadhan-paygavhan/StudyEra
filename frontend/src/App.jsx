@@ -21,6 +21,7 @@ import EnrollPage from "./pages/enroll/EnrollPage";
 import AuthSuccess from "./pages/AuthSuccess";
 import Order from "./pages/Order";
 import WatchVideo from "./pages/my-batch/WatchVideo";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -48,6 +49,14 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/courses/:courseId" element={<CourseDetailPage />} />
           <Route path="/auth-success" element={<AuthSuccess />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/mybatch/watch/:courseId"
             element={

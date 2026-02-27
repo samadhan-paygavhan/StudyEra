@@ -1,7 +1,6 @@
-import { useId } from "react";
 import { verifyMail } from "../Email-Verify/verifyMail.js";
 import sessionModel from "../models/sessionModel.js";
-import userModel from "../models/userModel.js";
+import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { sendOtpMail } from "../Email-Verify/sendOtpMail.js";
@@ -9,7 +8,7 @@ import { sendOtpMail } from "../Email-Verify/sendOtpMail.js";
 export const signup = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
-    const isExistingUser = await userModel.findOne({ email });
+    const isExistingUser = await User.findOne({ email });
     if (isExistingUser) {
       return res.status(400).json({
         success: false,
@@ -19,10 +18,11 @@ export const signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new userModel({
+    const newUser = new User({
       fullName,
       email,
       password: hashedPassword,
+      avatar: "",
     });
 
     const token = jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, {
@@ -76,7 +76,7 @@ export const verification = async (req, res) => {
       });
     }
 
-    const user = await userModel.findById(decoded.id);
+    const user = await User.findById(decoded.id);
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -110,7 +110,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const user = await userModel.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -177,8 +177,8 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
   try {
     const userId = req.userId;
-    await sessionModel.deleteMany(userId);
-    await userModel.findByIdAndUpdate(userId, { isLoggedIn: false });
+    await sessionModel.deleteMany({ userId });
+    await User.findByIdAndUpdate(userId, { isLoggedIn: false });
     return res.status(200).json({
       success: true,
       message: "Logout Successfully",
@@ -194,7 +194,7 @@ export const logout = async (req, res) => {
 export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await userModel.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -234,7 +234,7 @@ export const verifyOTP = async (req, res) => {
     });
   }
   try {
-    const user = await userModel.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -298,7 +298,7 @@ export const changePassword = async (req, res) => {
   }
 
   try {
-    const user = await userModel.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -325,8 +325,7 @@ export const changePassword = async (req, res) => {
 
 export const getMyProfile = async (req, res) => {
   try {
-    // req.user.id is populated by your isAuthenticated middleware
-    const user = await userModel.findById(req.userId).select("-password");
+    const user = await User.findById(req.userId).select("-password");
 
     if (!user) {
       return res

@@ -23,7 +23,10 @@ const TopCourses = () => {
       <h1 className="font-bold text-3xl">Top Courses</h1>
 
       {topCoursesData.length > 0 ? (
-        <TopCourseSlider topCoursesData={topCoursesData} />
+        <TopCourseSlider
+          key={topCoursesData._id}
+          topCoursesData={topCoursesData}
+        />
       ) : (
         <div className="flex flex-col items-center py-10">
           <h2 className="text-xl text-gray-500">

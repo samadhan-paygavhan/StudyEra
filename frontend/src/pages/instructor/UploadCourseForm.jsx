@@ -8,6 +8,7 @@ const UploadCourseForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm();
 
@@ -44,11 +45,12 @@ const UploadCourseForm = () => {
         },
       );
 
-      console.log("Upload Success:", res.data);
-      alert("Course uploaded successfully!");
+      toast.success(res.data.message || "Course uploaded successfully!");
+
+      reset();
+      setUploadProgress(0);
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
-      toast.error.message();
     }
   };
 

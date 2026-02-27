@@ -1,50 +1,15 @@
 import React, { useState } from "react";
 import LocalButton from "../Button";
 import { IoReorderThreeOutline } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { LogOut, User, Video } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import axios from "axios";
+import { Link } from "react-router-dom";
 import { getData } from "@/context/userContext";
-import { toast } from "sonner";
+
+import UserProfileLogo from "./UserProfileLogo";
 
 const Buttons = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  const navigate = useNavigate();
   const { user, setUser } = getData();
   const [toggle, setToggle] = useState(false);
-  const logoutHandler = async () => {
-    try {
-      const res = await axios.post(
-        `http://localhost:8080/logout`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
-      );
 
-      if (res.data.success) {
-        navigate("/login");
-        localStorage.clear();
-        setUser(null);
-        toast.success(res.data.message);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
   const primaryButtonName = [
     {
       name: "Home",
@@ -92,51 +57,14 @@ const Buttons = () => {
             return <LocalButton btnName={btn.name} key={idx} url={btn.route} />;
           })
         ) : (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full ml-5">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage
-                    src={user.avatar || "https://github.com/shadcn.png"}
-                    alt="shadcn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-white mt-3 p-1">
-              <DropdownMenuGroup>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-gray-500" />
-                <DropdownMenuItem className="hover:bg-gray-100">
-                  <User />
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="hover:bg-gray-100"
-                  onClick={() => navigate("/mybatch")}
-                >
-                  <Video />
-                  My Batch
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator className="bg-gray-300" />
-              <DropdownMenuItem
-                className="hover:bg-gray-100"
-                onClick={logoutHandler}
-              >
-                <LogOut />
-                Logout
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <UserProfileLogo />
         )}
       </div>
 
       <div className="lg:hidden max-sm:flex items-center">
         <div className="flex items-center p-2 rounded-lg transition-all duration-200 hover:bg-gray-100 active:bg-gray-200 active:scale-90 group">
           <IoReorderThreeOutline
-            className="text-[2.5rem] text-[#09090f] group-hover:text-[#483D8B] transition-colors"
+            className="text-[2.5rem] text-[#09090f] group-hover:text-[#483D8B] transition-colors cursor-pointer"
             onClick={() => setToggle(!toggle)}
           />
         </div>
@@ -154,6 +82,7 @@ const Buttons = () => {
             ))}
           </div>
         ) : null}
+        {user && <UserProfileLogo />}
       </div>
     </>
   );

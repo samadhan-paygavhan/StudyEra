@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBarExplore from "./NavBarExplore";
 import { IoIosSearch } from "react-icons/io";
+import HandleSearchBar from "./HandleSearchBar";
 
 const NavInput = () => {
+  const [searchInput, setSearchInput] = useState("");
+  const handleInput = (e) => {
+    const value = e.target.value;
+
+    setSearchInput(value);
+  };
   return (
     <>
       <div className="hidden sm:flex items-center gap-[1rem] h-full">
@@ -13,8 +20,13 @@ const NavInput = () => {
             type="text"
             placeholder="Search here"
             className="xl: h-6 w-38 lg:w-[4.8rem] xl:w-[9rem] border-none mx-4 lg:mx-2 outline-none bg-transparent text-[1.1rem] text-black placeholder:text-gray-400"
+            value={searchInput}
+            onChange={handleInput}
           />
         </span>
+        {searchInput.length > 0 && (
+          <HandleSearchBar searchInput={searchInput} />
+        )}
       </div>
     </>
   );

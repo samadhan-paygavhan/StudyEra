@@ -11,7 +11,6 @@ const Hero = () => {
     const fetchCourses = async () => {
       try {
         const response = await axios.get("http://localhost:8080/courses");
-        console.log(response.data.courses[0]);
         setCoursesData(response.data.courses);
       } catch (error) {
         console.error("Failed to fetch courses:", error);
@@ -66,7 +65,7 @@ const Hero = () => {
         <div className="flex flex-wrap justify-center gap-8 transition-all duration-500">
           {activeCategoryCourse && activeCategoryCourse.length > 0 ? (
             activeCategoryCourse.map((course) => (
-              <div key={course.id} className="animate-fadeIn">
+              <div key={course._id} className="animate-fadeIn">
                 <Card coursesData={course} />
               </div>
             ))

@@ -1,7 +1,7 @@
-import Card from "@/components/common/Card";
 import { getData } from "@/context/userContext";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import UploadedCourseCard from "./UploadedCourseCard";
 
 const UploadedCourses = () => {
   const { user } = getData();
@@ -45,7 +45,7 @@ const UploadedCourses = () => {
           </div>
         ) : (
           uploadedCourses.map((course) => (
-            <Card key={course._id} coursesData={course} />
+            <UploadedCourseCard key={course._id} coursesData={course} />
           ))
         )}
       </div>

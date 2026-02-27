@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ExploreAndFooter = () => {
-  // 1. Track the window width for responsive logic
   const [width, setWidth] = useState(window.innerWidth);
+  const navigate = useNavigate();
 
-  // 2. Update width state whenever the window is resized
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
 
-    // Clean up the listener when the component unmounts
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -162,7 +161,10 @@ const ExploreAndFooter = () => {
           <p>© 2026 StudyEra Educational Platform. All rights reserved.</p>
 
           <div className="flex gap-4 md:gap-6 mt-4 md:mt-0 uppercase font-semibold tracking-widest">
-            <span className="hover:text-white cursor-pointer transition-colors">
+            <span
+              className="hover:text-white cursor-pointer transition-colors"
+              onClick={() => navigate("/about")}
+            >
               About Us
             </span>
             <span className="hover:text-white cursor-pointer transition-colors">
