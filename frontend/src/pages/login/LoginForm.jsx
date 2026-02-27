@@ -17,12 +17,13 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm();
 
   const formSubmit = async (data) => {
     try {
-      const URL = "http://localhost:8080/login";
+      const URL = "http://localhost:8080/api/login";
       const res = await axios.post(URL, data, {
         headers: {
           "Content-Type": "application/json",
@@ -33,10 +34,15 @@ const LoginForm = () => {
         toast.success(res.data.message);
         setUser(res.data.user);
         localStorage.setItem("accessToken", res.data.accessToken);
+        reset();
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Resistration Error: ", error);
+      const errorMessage =
+        error.response?.data?.message || "Something went wrong";
+      toast.error(errorMessage);
+      reset();
     }
   };
   return (
@@ -85,7 +91,7 @@ const LoginForm = () => {
               {errors.password.message}
             </p>
           )}
-          <Link to={"/forgot-password"} className="text-gray-700 mx-1">
+          <Link to={"/api/forgot-password"} className="text-gray-700 mx-1">
             Forgot your password?
           </Link>
         </div>
@@ -127,7 +133,7 @@ const LoginForm = () => {
           Don't have an account?{" "}
           <Link
             className="text-indigo-600 font-bold hover:underline"
-            to={"/signup"}
+            to={"/api/signup"}
           >
             Signup
           </Link>

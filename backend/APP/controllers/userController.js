@@ -28,6 +28,7 @@ export const signup = async (req, res) => {
     const token = jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, {
       expiresIn: "10m",
     });
+
     verifyMail(token, email);
     newUser.token = token;
 
@@ -156,13 +157,19 @@ export const login = async (req, res) => {
       expiresIn: "30d",
     });
 
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
     user.isLoggedIn = true;
 
     await user.save();
     return res.status(200).json({
       success: true,
       message: `Welcome back ${user.fullName}`,
-      refreshToken,
       accessToken,
       user,
     });

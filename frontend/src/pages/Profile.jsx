@@ -54,7 +54,7 @@ const Profile = () => {
               </div>
 
               <button
-                onClick={() => navigate("/mybatch")}
+                onClick={() => navigate("/api/mybatch")}
                 className="px-8 py-3 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 hover:shadow-lg transition-all transform active:scale-95 shadow-md"
               >
                 My Courses

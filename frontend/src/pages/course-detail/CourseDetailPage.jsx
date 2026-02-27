@@ -14,7 +14,7 @@ const CourseDetailPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/courses/${courseId}`,
+          `http://localhost:8080/api/courses/${courseId}`,
         );
         if (response.data.success) {
           setCourseDetail(response.data.course);
@@ -35,13 +35,10 @@ const CourseDetailPage = () => {
     );
   }
 
-  console.log(courseDetail);
-
   return (
     <>
       <Navbar />
       <Hero data={courseDetail} />
-      {/* Added optional chaining ?. to prevent crash if video is missing */}
       <CourseInfoVideo
         introductionVideo={courseDetail.introductionVideo?.url}
       />

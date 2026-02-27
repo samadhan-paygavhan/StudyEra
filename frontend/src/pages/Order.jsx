@@ -9,21 +9,23 @@ const Order = () => {
   const { courseId } = useParams();
   const navigate = useNavigate();
 
-  console.log(courseId);
-
   useEffect(() => {
     const paymentHandler = async () => {
       if (!user) {
-        return navigate("/login");
+        return navigate("/api/login");
       }
 
-      const amount = 500;
-      const currency = "INR";
-      const receipt = "receipt_order_123";
-
       try {
+        const courseData = await axios.get(
+          `http://localhost:8080/api/courses/${courseId}`,
+        );
+
+        const amount = courseData.data.course.discountedPrice * 100;
+        const currency = "INR";
+        const receipt = `receipt_order_${courseData.data.course._id}`;
+
         // 1. Create Order on Backend
-        const response = await axios.post("http://localhost:8080/order", {
+        const response = await axios.post("http://localhost:8080/api/order", {
           amount,
           currency,
           receipt,
@@ -42,7 +44,7 @@ const Order = () => {
           handler: async function (response) {
             try {
               const verifyRes = await axios.post(
-                "http://localhost:8080/verify-payment",
+                "http://localhost:8080/api/verify-payment",
                 {
                   razorpay_order_id: response.razorpay_order_id,
                   razorpay_payment_id: response.razorpay_payment_id,
@@ -54,18 +56,18 @@ const Order = () => {
 
               if (verifyRes.data.success) {
                 toast("Payment Successful! Course Unlocked");
-                navigate("/mybatch");
+                navigate("/api/mybatch");
               }
             } catch (err) {
               console.error("Verification Failed", err);
             }
           },
           prefill: {
-            name: "User Name", // Use userData.user.name from context
+            name: "User Name",
             email: "user@example.com",
           },
           theme: {
-            color: "#6a5acd", // Matches your Study Era theme
+            color: "#6a5acd",
           },
         };
 

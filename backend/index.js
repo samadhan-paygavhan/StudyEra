@@ -21,12 +21,12 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(userRouter);
+app.use("/api", userRouter);
 app.use(authRouter);
-app.use(courseUpload);
-app.use(courseRoute);
-app.use(order);
-app.use(myBatch);
+app.use("/api", courseUpload);
+app.use("/api", courseRoute);
+app.use("/api", order);
+app.use("/api", myBatch);
 
 app.listen(PORT, () => {
   connectDB();

@@ -7,7 +7,7 @@ import { getData } from "@/context/userContext";
 import UserProfileLogo from "./UserProfileLogo";
 
 const Buttons = () => {
-  const { user, setUser } = getData();
+  const { user } = getData();
   const [toggle, setToggle] = useState(false);
 
   const primaryButtonName = [
@@ -18,29 +18,29 @@ const Buttons = () => {
 
     {
       name: "Courses",
-      route: "/courses",
+      route: "/api/courses",
     },
 
     {
       name: "Instructor",
-      route: "/instructor",
+      route: "/api/instructor",
     },
 
     {
       name: "About",
-      route: "/about",
+      route: "/api/about",
     },
   ];
 
   const loginAndSignupButton = [
     {
       name: "Login",
-      route: "/login",
+      route: "/api/login",
     },
 
     {
       name: "SignUp",
-      route: "/signup",
+      route: "/api/signup",
     },
   ];
 

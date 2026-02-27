@@ -1,9 +1,8 @@
 import nodemailer from "nodemailer";
 import "dotenv/config";
-import { text } from "express";
 
 export const verifyMail = async (token, email) => {
-  const verifyLink = `http://localhost:5173/verify/${encodeURIComponent(token)}`;
+  const verifyLink = `http://localhost:5173/api/verify/${encodeURIComponent(token)}`;
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {

@@ -36,7 +36,7 @@ const UploadCourseForm = () => {
       }
 
       const res = await axios.post(
-        `http://localhost:8080/course-upload/${userData.user._id}`,
+        `http://localhost:8080/api/course-upload/${userData.user._id}`,
         formData,
         {
           headers: {
@@ -46,11 +46,10 @@ const UploadCourseForm = () => {
       );
 
       toast.success(res.data.message || "Course uploaded successfully!");
-
       reset();
-      setUploadProgress(0);
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
+      toast.error(res.data.message || "Something went wrong");
     }
   };
 

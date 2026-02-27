@@ -113,7 +113,7 @@ const NavBarExplore = () => {
                     key={index}
                     className="w-full h-[37.5px] px-[15px] flex items-center justify-between text-[1rem] text-[#1A1939] font-medium cursor-pointer transition-all duration-300 hover:bg-[#cfcbeb] hover:text-[#483D8B] group"
                     onMouseEnter={() => setSelectedCourse(course)}
-                    onClick={() => navigate("/courses")}
+                    onClick={() => navigate("/api/courses")}
                   >
                     <p>{course.name}</p>
                     <FaAngleRight className="fa-solid fa-angle-right text-sm opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />

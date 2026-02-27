@@ -31,13 +31,13 @@ const MyBatchCard = ({ coursesData }) => {
           <div className="mt-auto flex gap-5 items-center justify-center pb-2">
             <Link
               className="flex items-center justify-center h-[2.8rem] w-[7rem] bg-[#483D8B] border-2 border-white text-white rounded-[0.375rem] font-medium transition-all opacity-90 hover:opacity-100 hover:bg-[#6a5acd] active:scale-95 shadow-md shadow-indigo-100 cursor-pointer max-sm:text-[10px]"
-              to={`/courses/${coursesData._id}`}
+              to={`/api/courses/${coursesData._id}`}
             >
               View More
             </Link>
             <Link
               className="flex items-center justify-center h-[2.8rem] w-[7rem] bg-[#483D8B] border-2 border-white text-white rounded-[0.375rem] font-medium transition-all opacity-90 hover:opacity-100 hover:bg-[#6a5acd] active:scale-95 shadow-md shadow-indigo-100 cursor-pointer max-sm:text-[10px]"
-              to={`/mybatch/watch/${coursesData._id}`}
+              to={`/api/mybatch/watch/${coursesData._id}`}
             >
               Watch Now
             </Link>

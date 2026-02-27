@@ -68,7 +68,7 @@ const Hero = () => {
             <div className="flex gap-5">
               <button
                 className="bg-[#483D8B] hover:bg-[#3b3272] text-white px-10 py-4 rounded-xl font-bold transition-all transform hover:translate-y-[-2px] hover:shadow-xl shadow-indigo-200"
-                onClick={() => navigate("/courses")}
+                onClick={() => navigate("/api/courses")}
               >
                 Explore Courses
               </button>

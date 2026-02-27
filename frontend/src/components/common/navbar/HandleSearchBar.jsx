@@ -9,8 +9,7 @@ const HandleSearchBar = ({ searchInput }) => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/courses");
-        // Ensure you are setting the array correctly
+        const response = await axios.get("http://localhost:8080/api/courses");
         setCoursesData(response.data.courses || []);
       } catch (error) {
         console.error("Failed to fetch courses:", error);
@@ -19,7 +18,6 @@ const HandleSearchBar = ({ searchInput }) => {
     fetchCourses();
   }, []);
 
-  // Filter based on the 'title' property of the course object
   const filteredData = coursesData.filter((course) =>
     course.title.toLowerCase().includes(searchInput.toLowerCase()),
   );
@@ -29,7 +27,7 @@ const HandleSearchBar = ({ searchInput }) => {
       {filteredData.length > 0 ? (
         filteredData.map((course, index) => (
           <button
-            onClick={() => navigate(`/courses/${course._id}`)} // Better: Navigate to specific course
+            onClick={() => navigate(`/api/courses/${course._id}`)}
             key={course._id || index}
             className="w-full text-left px-4 py-2 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors text-sm font-medium"
           >

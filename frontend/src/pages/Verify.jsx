@@ -11,7 +11,7 @@ const verify = () => {
     const verifyEmail = async () => {
       try {
         const res = await axios.post(
-          "http://localhost:8080/verify",
+          "http://localhost:8080/api/verify",
           {},
           {
             headers: {
@@ -23,7 +23,7 @@ const verify = () => {
         if (res.data.success) {
           setStatus("✅ Email Verified Successfully");
           setTimeout(() => {
-            navigate("/login");
+            navigate("/api/login");
           }, 2000);
         } else {
           setStatus("❌ Invalid or Expired Token");

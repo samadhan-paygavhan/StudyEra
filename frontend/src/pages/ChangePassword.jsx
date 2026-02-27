@@ -31,7 +31,7 @@ const ChangePassword = () => {
     try {
       setIsLoading(true);
       const res = await axios.post(
-        `http://localhost:8080/change-password/${email}`,
+        `http://localhost:8080/api/change-password/${email}`,
         {
           newPassword,
           confirmPassword,
@@ -40,7 +40,7 @@ const ChangePassword = () => {
 
       setSuccess(res.data.message);
       setTimeout(() => {
-        navigate("/login");
+        navigate("/api/login");
       }, 2000);
     } catch (error) {
       setError(error.response?.data?.message || "Something went wrong");

@@ -163,7 +163,7 @@ const ExploreAndFooter = () => {
           <div className="flex gap-4 md:gap-6 mt-4 md:mt-0 uppercase font-semibold tracking-widest">
             <span
               className="hover:text-white cursor-pointer transition-colors"
-              onClick={() => navigate("/about")}
+              onClick={() => navigate("/api/about")}
             >
               About Us
             </span>

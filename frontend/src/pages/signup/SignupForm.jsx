@@ -15,11 +15,12 @@ const SignupForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm();
 
   const formSubmit = async (data) => {
-    const URL = "http://localhost:8080/signup";
+    const URL = "http://localhost:8080/api/signup";
     try {
       const res = await axios.post(URL, data, {
         headers: {
@@ -28,11 +29,14 @@ const SignupForm = () => {
       });
 
       if (res.data.success) {
-        navigate("/verify");
+        navigate("/api/verify");
         toast.success(res.data.message);
       }
     } catch (error) {
-      console.log("Frontend", error.message);
+      const errorMessage =
+        error.response?.data?.message || "Something went wrong";
+      toast.error(errorMessage);
+      reset();
     }
   };
 
@@ -145,29 +149,12 @@ const SignupForm = () => {
         </button>
       </form>
 
-      <div className="relative mt-10 mb-6">
-        <div className="absolute inset-0 flex items-center">
-          <hr className="w-full border-gray-400" />
-        </div>
-        <div className="relative flex justify-center text-sm">
-          <span className="px-4 bg-white text-gray-500">
-            Other log in options
-          </span>
-        </div>
-      </div>
-
-      <div className="flex justify-center gap-10">
-        <button className="w-full h-12 flex items-center justify-center border-2 border-[#483D8B] rounded-xl hover:bg-indigo-50 transition-colors text-gray-700 opacity-80">
-          Continue with Google &nbsp; {<FaGoogle />}
-        </button>
-      </div>
-
       <div className="mt-10 p-4 bg-gray-200 rounded-xl text-center transition-all hover:bg-gray-300">
         <p className="text-gray-600 text-sm">
           Already have an account?{" "}
           <Link
             className="text-indigo-600 font-bold hover:underline"
-            to={"/login"}
+            to={"/api/login"}
           >
             Login
           </Link>

@@ -16,7 +16,7 @@ const WatchVideo = () => {
         console.log(token);
 
         const { data } = await axios.get(
-          `http://localhost:8080/mybatch/course/${courseId}`,
+          `http://localhost:8080/api/mybatch/course/${courseId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -56,9 +56,7 @@ const WatchVideo = () => {
 
       <main className="container mx-auto px-4 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* LEFT: Main Video & Info Section */}
           <div className="flex-1 lg:w-[70%]">
-            {/* Video Player Container */}
             <div className="bg-black rounded-2xl overflow-hidden shadow-2xl aspect-video ring-1 ring-white/10">
               {course?.mainVideo?.url ? (
                 <video
@@ -79,7 +77,6 @@ const WatchVideo = () => {
               )}
             </div>
 
-            {/* Course Info Below Video */}
             <div className="mt-8 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100">
               <div className="flex items-center gap-2 mb-4">
                 <span className="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded uppercase tracking-wider">

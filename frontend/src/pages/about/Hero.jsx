@@ -23,13 +23,13 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <button
-            onClick={() => navigate("/courses")}
+            onClick={() => navigate("/api/courses")}
             className="px-8 py-4 bg-[#3498db] hover:bg-[#2980b9] rounded-full font-bold transition-all shadow-lg shadow-[#3498db]/20"
           >
             Explore Courses
           </button>
           <button
-            onClick={() => navigate("/instructor")}
+            onClick={() => navigate("/api/instructor")}
             className="px-8 py-4 bg-transparent border border-gray-600 hover:border-white rounded-full font-bold transition-all"
           >
             Join as Instructor

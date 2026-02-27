@@ -14,7 +14,7 @@ const UploadedCourses = () => {
 
       try {
         const response = await axios.get(
-          `http://localhost:8080/uploaded-course/${user._id}`,
+          `http://localhost:8080/api/uploaded-course/${user._id}`,
           { withCredentials: true },
         );
 

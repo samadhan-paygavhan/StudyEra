@@ -44,14 +44,14 @@ const VerifyOTP = () => {
     try {
       setIsLoading(true);
       const res = await axios.post(
-        `http://localhost:8080/verify-otp/${email}`,
+        `http://localhost:8080/api/verify-otp/${email}`,
         {
           otp: finalOtp,
         },
       );
       setSuccessMessage(res.data.message);
       setTimeout(() => {
-        navigate(`/change-password/${email}`);
+        navigate(`/api/change-password/${email}`);
       }, 2000);
     } catch (error) {
       setError(error.response?.data?.message || "Something went wrong");
@@ -172,7 +172,7 @@ const VerifyOTP = () => {
               <p className="text-sm text-muted-foreground">
                 Wrong email?{" "}
                 <Link
-                  to={"/forgot-password"}
+                  to={"/api/forgot-password"}
                   className="text-[#483D8B] hover:underline font-medium"
                 >
                   Go back

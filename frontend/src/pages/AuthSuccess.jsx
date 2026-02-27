@@ -13,12 +13,11 @@ const AuthSuccess = () => {
       const accessToken = params.get("token");
       if (accessToken) {
         try {
-          const res = await axios.get("http://localhost:8080/me", {
+          const res = await axios.get("http://localhost:8080/api/me", {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
           });
-          console.log(res.data);
 
           if (res.data.success) {
             setUser(res.data.user);

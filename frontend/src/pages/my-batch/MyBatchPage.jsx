@@ -18,7 +18,7 @@ const MyBatchPage = () => {
       if (!user?._id) return;
 
       try {
-        const response = await axios.get("http://localhost:8080/myBatch", {
+        const response = await axios.get("http://localhost:8080/api/myBatch", {
           params: { userId: user._id },
         });
 
@@ -36,8 +36,6 @@ const MyBatchPage = () => {
 
     fetchMyCourses();
   }, [user?._id]);
-
-  console.log(myCourses);
 
   return (
     <>
@@ -77,7 +75,7 @@ const MyBatchPage = () => {
               catalog to begin learning!
             </p>
             <button
-              onClick={() => navigate("/courses")}
+              onClick={() => navigate("/api/courses")}
               className="mt-6 px-6 py-3 bg-[#483D8B] text-white rounded-lg font-semibold hover:bg-[#6a5acd] transition-colors shadow-lg shadow-indigo-100"
             >
               Explore Courses

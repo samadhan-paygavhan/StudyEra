@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getData } from "@/context/userContext";
 import axios from "axios";
 import { CheckCircle, Loader2 } from "lucide-react";
 import React, { useState } from "react";
@@ -29,11 +28,14 @@ const ForgotPassword = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const res = await axios.post(`http://localhost:8080/forgot-password`, {
-        email,
-      });
+      const res = await axios.post(
+        `http://localhost:8080/api/forgot-password`,
+        {
+          email,
+        },
+      );
       if (res.data.success) {
-        navigate(`/verify-otp/${email}`);
+        navigate(`/api/verify-otp/${email}`);
         toast.success(res.data.message);
         setEmail("");
       }
@@ -130,7 +132,7 @@ const ForgotPassword = () => {
                 <p>
                   Remember your password?{" "}
                   <Link
-                    to={"/login"}
+                    to={"/api/login"}
                     className="text-[#483D8B] hover:underline font-medium relative"
                   >
                     Log in

@@ -12,12 +12,10 @@ import NotFound from "./pages/NotFound";
 import VerifyEmail from "./pages/VerifyEmail";
 import Verify from "./pages/verify";
 import ForgotPassword from "./pages/ForgotPassword";
-import Logout from "./pages/Logout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import VerifyOTP from "./pages/VerifyOTP";
 import ChangePassword from "./pages/ChangePassword";
 import CourseDetailPage from "./pages/course-detail/CourseDetailPage";
-import EnrollPage from "./pages/enroll/EnrollPage";
 import AuthSuccess from "./pages/AuthSuccess";
 import Order from "./pages/Order";
 import WatchVideo from "./pages/my-batch/WatchVideo";
@@ -29,28 +27,31 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/courses" element={<CoursesPage />} />
+          <Route path="/api/courses" element={<CoursesPage />} />
           <Route
-            path="/mybatch"
+            path="/api/mybatch"
             element={
               <ProtectedRoute>
                 <MyBatchPage />
               </ProtectedRoute>
             }
           />
-          <Route path="/instructor" element={<InstructorPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/verify" element={<VerifyEmail />} />
-          <Route path="/verify/:token" element={<Verify />} />
-          <Route path="/verify-otp/:email" element={<VerifyOTP />} />
-          <Route path="/change-password/:email" element={<ChangePassword />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/courses/:courseId" element={<CourseDetailPage />} />
+          <Route path="/api/instructor" element={<InstructorPage />} />
+          <Route path="/api/about" element={<AboutPage />} />
+          <Route path="/api/login" element={<LoginPage />} />
+          <Route path="/api/signup" element={<SignupPage />} />
+          <Route path="/api/verify" element={<VerifyEmail />} />
+          <Route path="/api/verify/:token" element={<Verify />} />
+          <Route path="/api/verify-otp/:email" element={<VerifyOTP />} />
+          <Route
+            path="/api/change-password/:email"
+            element={<ChangePassword />}
+          />
+          <Route path="/api/forgot-password" element={<ForgotPassword />} />
+          <Route path="/api/courses/:courseId" element={<CourseDetailPage />} />
           <Route path="/auth-success" element={<AuthSuccess />} />
           <Route
-            path="/profile"
+            path="/api/profile"
             element={
               <ProtectedRoute>
                 <Profile />
@@ -58,7 +59,7 @@ function App() {
             }
           />
           <Route
-            path="/mybatch/watch/:courseId"
+            path="/api/mybatch/watch/:courseId"
             element={
               <ProtectedRoute>
                 <WatchVideo />
@@ -66,29 +67,14 @@ function App() {
             }
           />
           <Route
-            path="/order/:courseId"
+            path="/api/order/:courseId"
             element={
               <ProtectedRoute>
                 <Order />
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/enroll/:course-id"
-            element={
-              <ProtectedRoute>
-                <EnrollPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/logout"
-            element={
-              <ProtectedRoute>
-                <Logout />
-              </ProtectedRoute>
-            }
-          />
+
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

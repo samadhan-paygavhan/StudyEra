@@ -23,7 +23,7 @@ const UserProfileLogo = () => {
   const logoutHandler = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:8080/logout`,
+        `http://localhost:8080/api/logout`,
         {},
         {
           headers: {
@@ -33,7 +33,7 @@ const UserProfileLogo = () => {
       );
 
       if (res.data.success) {
-        navigate("/login");
+        navigate("/api/login");
         localStorage.clear();
         setUser(null);
         toast.success(res.data.message);
@@ -42,8 +42,6 @@ const UserProfileLogo = () => {
       console.log(error.message);
     }
   };
-
-  console.log(user.avatar);
 
   return (
     <DropdownMenu>
@@ -57,7 +55,7 @@ const UserProfileLogo = () => {
               referrerPolicy="no-referrer"
             />
             <AvatarFallback className="font-semibold text-2xl text-[#121212]">
-              {user.fullName[0]}
+              CN
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -68,14 +66,14 @@ const UserProfileLogo = () => {
           <DropdownMenuSeparator className="bg-gray-500" />
           <DropdownMenuItem
             className="hover:bg-gray-100"
-            onClick={() => navigate("/profile")}
+            onClick={() => navigate("/api/profile")}
           >
             <User />
             Profile
           </DropdownMenuItem>
           <DropdownMenuItem
             className="hover:bg-gray-100"
-            onClick={() => navigate("/mybatch")}
+            onClick={() => navigate("/api/mybatch")}
           >
             <Video />
             My Batch
